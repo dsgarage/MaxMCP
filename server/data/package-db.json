@@ -1,0 +1,142 @@
+[
+  {
+    "name": "CNMAT Externals",
+    "id": "cnmat-externals",
+    "description": "UC Berkeley CNMAT の音響解析・合成ツール群。OSCプロトコル対応。",
+    "description_en": "Audio analysis and synthesis tools from UC Berkeley CNMAT, with OSC protocol support",
+    "domain": ["msp"],
+    "tags": ["analysis", "synthesis", "spectral", "OSC", "resonance"],
+    "url": "https://cnmat.berkeley.edu/downloads",
+    "objects": ["resonators~", "o.route", "o.compose", "o.pack", "SDIF-buffer", "sinusoids~"]
+  },
+  {
+    "name": "IRCAM Spat",
+    "id": "ircam-spat",
+    "description": "IRCAMが開発した高品質な空間音響処理ライブラリ。バイノーラル、アンビソニックス、VBAP等に対応。",
+    "description_en": "High-quality spatial audio processing library from IRCAM. Supports binaural, ambisonics, VBAP, and more.",
+    "domain": ["msp"],
+    "tags": ["spatial", "binaural", "ambisonics", "VBAP", "spatialization", "3D audio", "immersive"],
+    "url": "https://forum.ircam.fr/projects/detail/spat/",
+    "objects": ["spat5.spat~", "spat5.viewer", "spat5.hoa.rotate~", "spat5.conv~"]
+  },
+  {
+    "name": "BEAP",
+    "id": "beap",
+    "description": "Berklee Electronic Analog Patching — モジュラーシンセスタイルのオーディオ処理モジュール集。Max付属。",
+    "description_en": "Berklee Electronic Analog Patching — modular synth style audio modules included with Max",
+    "domain": ["msp"],
+    "tags": ["modular", "synth", "analog", "oscillator", "filter", "sequencer", "beginner"],
+    "url": "https://cycling74.com/tutorials/beap",
+    "objects": ["bp.Oscillator", "bp.VCF", "bp.LFO", "bp.ADSR", "bp.Mixer", "bp.Sequencer"]
+  },
+  {
+    "name": "Vizzie",
+    "id": "vizzie",
+    "description": "Jitterベースのビジュアルエフェクトモジュール集。ビデオ処理の入門に最適。Max付属。",
+    "description_en": "Jitter-based visual effects modules for easy video processing. Included with Max.",
+    "domain": ["jitter"],
+    "tags": ["video", "visual", "effects", "beginner", "VJ", "processing", "GPU"],
+    "url": "https://cycling74.com/tutorials/vizzie",
+    "objects": ["vz.playr", "vz.brcosa", "vz.grabr", "vz.movieplayr", "vz.pixl", "vz.recorderr"]
+  },
+  {
+    "name": "Node for Max",
+    "id": "node-for-max",
+    "description": "Max内でNode.jsを実行し、npm packages、Web API、ファイルシステムアクセス等を利用可能に。Max付属。",
+    "description_en": "Run Node.js within Max for npm packages, web APIs, file system access, and more. Included with Max.",
+    "domain": ["max"],
+    "tags": ["Node.js", "JavaScript", "web", "API", "npm", "server", "network"],
+    "url": "https://cycling74.com/articles/node-for-max",
+    "objects": ["node.script", "node.debug", "node.autowatch"]
+  },
+  {
+    "name": "odot (o.)",
+    "id": "odot",
+    "description": "CNMAT発のOSCベースデータ処理ライブラリ。構造化データの操作・ルーティングに強力。",
+    "description_en": "OSC-based data processing library from CNMAT for structured data manipulation and routing",
+    "domain": ["max"],
+    "tags": ["OSC", "data", "routing", "expression", "structured"],
+    "url": "https://github.com/CNMAT/CNMAT-odot",
+    "objects": ["o.route", "o.compose", "o.pack", "o.expr", "o.if", "o.union", "o.select"]
+  },
+  {
+    "name": "bach: automated composer's helper",
+    "id": "bach",
+    "description": "コンピュータ支援作曲ライブラリ。楽譜表示、リスト操作、アルゴリズム作曲ツール群。",
+    "description_en": "Computer-aided composition library with score notation, advanced list processing, and algorithmic tools",
+    "domain": ["max"],
+    "tags": ["composition", "notation", "score", "algorithmic", "music", "CAC", "list processing"],
+    "url": "https://www.bachproject.net/",
+    "objects": ["bach.score", "bach.roll", "bach.slot", "bach.quantize", "bach.collect", "bach.flat"]
+  },
+  {
+    "name": "Karma~",
+    "id": "karma",
+    "description": "高機能バッファベースのルーパー。可変速再生、逆再生、クロスフェードループに対応。",
+    "description_en": "Advanced buffer-based looper with variable speed, reverse playback, and crossfade looping",
+    "domain": ["msp"],
+    "tags": ["looper", "buffer", "recording", "playback", "live", "performance"],
+    "url": "https://github.com/rconstanzo/karma",
+    "objects": ["karma~"]
+  },
+  {
+    "name": "cv.jit",
+    "id": "cv-jit",
+    "description": "Jitter向けコンピュータビジョン外部オブジェクト群。ブロブ追跡、輪郭検出、オプティカルフロー等。",
+    "description_en": "Computer vision externals for Jitter including blob tracking, contour detection, optical flow, and more",
+    "domain": ["jitter"],
+    "tags": ["computer vision", "tracking", "blob", "contour", "optical flow", "detection"],
+    "url": "https://jmpelletier.com/cvjit/",
+    "objects": ["cv.jit.blobs.bounds", "cv.jit.track", "cv.jit.faces", "cv.jit.opticalflow", "cv.jit.canny"]
+  },
+  {
+    "name": "MIRA",
+    "id": "mira",
+    "description": "iPadをMaxパッチのタッチコントロールサーフェスとして使用するフレームワーク。Max付属。",
+    "description_en": "Framework to use iPad as a touch control surface for Max patches. Included with Max.",
+    "domain": ["max"],
+    "tags": ["iPad", "touch", "remote", "control", "UI", "wireless", "mobile"],
+    "url": "https://cycling74.com/products/mira",
+    "objects": ["mira.frame", "mira.multitouch", "mira.status"]
+  },
+  {
+    "name": "HI (Human Interface)",
+    "id": "hi",
+    "description": "ゲームコントローラー、ジョイスティック等のHIDデバイスからの入力を取得。Max付属。",
+    "description_en": "Get input from HID devices like game controllers and joysticks. Included with Max.",
+    "domain": ["max"],
+    "tags": ["HID", "controller", "gamepad", "joystick", "input", "sensor"],
+    "url": "https://docs.cycling74.com/max8/refpages/hi",
+    "objects": ["hi"]
+  },
+  {
+    "name": "Ease",
+    "id": "ease",
+    "description": "多様なイージング関数を提供するパッケージ。アニメーションやパラメーター変化のカーブ制御に。Max付属。",
+    "description_en": "Collection of easing functions for animation curves and smooth parameter transitions. Included with Max.",
+    "domain": ["max"],
+    "tags": ["easing", "animation", "curve", "interpolation", "smoothing"],
+    "url": "https://cycling74.com/packages/ease",
+    "objects": ["ease.bounceIn", "ease.cubicInOut", "ease.elasticOut", "ease.sineIn"]
+  },
+  {
+    "name": "MC (Multichannel)",
+    "id": "mc",
+    "description": "マルチチャンネルオーディオのためのMCラッパー群。パラメトリック・ポリフォニー、空間処理等。Max付属。",
+    "description_en": "Multichannel audio wrappers for parametric polyphony, spatial processing, and more. Included with Max.",
+    "domain": ["msp"],
+    "tags": ["multichannel", "polyphony", "spatial", "mc", "channel"],
+    "url": "https://cycling74.com/articles/an-introduction-to-mc",
+    "objects": ["mc.cycle~", "mc.gain~", "mc.mixdown~", "mc.pack~", "mc.unpack~", "mc.target~"]
+  },
+  {
+    "name": "Max for Live (M4L)",
+    "id": "max-for-live",
+    "description": "Ableton Live内でMaxパッチを実行するフレームワーク。Live API経由でDAWを完全制御。",
+    "description_en": "Framework to run Max patches inside Ableton Live with full DAW control via Live API",
+    "domain": ["max", "msp"],
+    "tags": ["Ableton", "Live", "M4L", "DAW", "plugin", "device"],
+    "url": "https://www.ableton.com/en/live/max-for-live/",
+    "objects": ["live.dial", "live.slider", "live.gain~", "live.button", "live.menu", "live.path", "live.object"]
+  }
+]

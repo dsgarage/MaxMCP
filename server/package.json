@@ -1,0 +1,11 @@
+{
+  "name": "maxmcp-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "ws": "^8.18.0",
+    "zod": "^4.3.6"
+  }
+}

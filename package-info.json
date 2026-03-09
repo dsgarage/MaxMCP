@@ -1,0 +1,26 @@
+{
+  "name": "MaxMCP",
+  "displayname": "MaxMCP — Claude Code for Max",
+  "description": "Claude Code から Max パッチの操作・検索、Ableton Live の制御を行う MCP サーバー",
+  "version": "1.0.0",
+  "author": "dsgarage",
+  "homepatcher": "MaxMCP_Client.maxpat",
+  "website": "https://github.com/dsgarage/MaxMCP",
+  "max_version_min": "9.0.0",
+  "os": {
+    "macintosh": {
+      "platform": [ "x64", "arm64" ]
+    },
+    "windows": {
+      "platform": [ "x64" ]
+    }
+  },
+  "requirements": {
+    "node": ">=22.0.0"
+  },
+  "filelist": {
+    "patchers": [ "MaxMCP_Client.maxpat" ],
+    "extras": [ "MaxMCP_Client.maxpat" ],
+    "javascript": [ "ws-bridge.js", "patcher-api.js" ]
+  }
+}

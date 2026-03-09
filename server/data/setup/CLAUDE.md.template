@@ -1,0 +1,65 @@
+# MaxMCP プロジェクト設定
+
+## 概要
+このプロジェクトは MaxMCP（Cycling '74 Max / Ableton Live 用 MCP サーバー）を使用しています。
+Claude Code から Max パッチの操作・検索・監視、Ableton Live の制御を行えます。
+
+## 言語ルール
+- 提案・計画・実装は日本語で行う
+- コード内コメントは日本語可（変数名・関数名は英語）
+
+## Max パッチ操作ルール
+
+### 配置
+- オブジェクト配置は自動レイアウトエンジンに任せる（座標手動指定は上級者向け）
+- グリッドサイズ: 15x15px
+- 信号フローは上→下、並列処理は左→右
+
+### 接続
+- ホットインレット（左端）にメッセージを送る前に、コールドインレット（右側）を先に設定
+- 1つのアウトレットから2つ以上接続する場合は `trigger` オブジェクトを使用して評価順を明示
+- パッチコードの種類（Event/Signal/MC/Jitter）は接続先オブジェクトで自動判定
+
+### 命名規則
+- send/receive 名: camelCase（例: `mainVolume`, `filterCutoff`）
+- アブストラクション名: プロジェクトプレフィックス付き（例: `myProject.synth`）
+- scripting name: snake_case（例: `main_osc`, `output_gain`）
+
+## 利用可能な Skills
+
+### パッチ構築
+- `/max-synth` — シンセサイザー構築（テンプレートから自動配置・接続・DSP ON）
+- `/max-fx` — エフェクトチェーン構築（直列/並列配線 + バイパス）
+- `/max-sampler` — サンプラー構築（buffer~ + groove~/play~ + エンベロープ）
+- `/max-midi` — MIDI 入力構成（notein → mtof → poly~）
+- `/max-jitter` — Jitter パイプライン構築（映像入力 → エフェクト → 出力）
+- `/max-reactive` — リアクティブ映像構築（MSP 分析 → Jitter パラメータ駆動）
+
+### レイアウト・整理
+- `/max-layout` — パッチ整理（再配置 + グリッドスナップ + パッチコード整理）
+- `/max-subpatch` — サブパッチ化（選択範囲を `[p]` に変換）
+- `/max-encapsulate` — アブストラクション化（選択範囲を別ファイルに分離）
+- `/max-presentation` — プレゼンテーション UI 構築
+
+### Ableton Live
+- `/ableton-track` — トラック構成（作成 + デバイス + ルーティング）
+- `/ableton-clip` — クリップ制作（MIDI ノート配置 + クオンタイズ）
+- `/ableton-arrange` — アレンジ構成（シーン + クリップ配置）
+- `/ableton-mixdown` — ミックスダウン（レベル + パン + センド）
+
+### 調査・学習
+- `/max-explain` — オブジェクトの詳細解説 + 使用例
+- `/max-compare` — 2つのオブジェクトの違い・使い分け
+- `/max-debug` — デバッグ支援（ログ分析 + 信号フロー追跡）
+- `/max-rnbo-check` — RNBO 互換性チェック
+- `/max-reference` — 公式ドキュメント参照
+
+## 基本 MCP ツール（常時利用可能）
+- `max.search.object` / `max.search.pattern` / `max.search.package` — 検索
+- `max.object.create` / `delete` / `connect` / `disconnect` — パッチ操作
+- `max.patcher.info` / `snapshot` — パッチ情報
+- `max.patcher.lock` / `unlock` / `save` — モード制御
+- `max.audio.toggle` / `status` — DSP 制御
+- `max.log.read` / `search` / `clear` — ログ
+
+何をしたいか分からない場合は、自然言語で伝えてください。適切な Skill やツールを案内します。

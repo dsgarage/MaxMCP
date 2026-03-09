@@ -1,0 +1,2268 @@
+{
+  "cycle~": {
+    "domain": "msp",
+    "category": "oscillator",
+    "description": "Sine wave oscillator with frequency and phase offset inputs",
+    "description_ja": "周波数と位相オフセット入力を持つサイン波オシレーター",
+    "inlets": [
+      {"type": "signal/float", "description": "Frequency in Hz"},
+      {"type": "signal/float", "description": "Phase offset (0-1)"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Sine wave output"}
+    ],
+    "related": ["saw~", "rect~", "phasor~", "tri~"],
+    "tags": ["sine", "oscillator", "tone", "waveform"],
+    "tags_ja": ["サイン波", "オシレーター", "トーン", "波形"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "saw~": {
+    "domain": "msp",
+    "category": "oscillator",
+    "description": "Band-limited sawtooth wave oscillator",
+    "description_ja": "帯域制限付きノコギリ波オシレーター",
+    "inlets": [
+      {"type": "signal/float", "description": "Frequency in Hz"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Sawtooth wave output"}
+    ],
+    "related": ["cycle~", "rect~", "phasor~", "tri~"],
+    "tags": ["sawtooth", "oscillator", "waveform"],
+    "tags_ja": ["ノコギリ波", "オシレーター", "波形"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "rect~": {
+    "domain": "msp",
+    "category": "oscillator",
+    "description": "Band-limited rectangle/pulse wave oscillator with variable duty cycle",
+    "description_ja": "デューティサイクル可変の帯域制限付き矩形波オシレーター",
+    "inlets": [
+      {"type": "signal/float", "description": "Frequency in Hz"},
+      {"type": "signal/float", "description": "Duty cycle (0-1)"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Rectangle wave output"}
+    ],
+    "related": ["cycle~", "saw~", "phasor~"],
+    "tags": ["rectangle", "pulse", "oscillator", "waveform", "PWM"],
+    "tags_ja": ["矩形波", "パルス", "オシレーター", "波形"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "phasor~": {
+    "domain": "msp",
+    "category": "oscillator",
+    "description": "Ramp/sawtooth wave generator producing values from 0 to 1",
+    "description_ja": "0から1の値を生成するランプ/ノコギリ波ジェネレーター",
+    "inlets": [
+      {"type": "signal/float", "description": "Frequency in Hz"},
+      {"type": "signal/float", "description": "Phase offset (0-1)"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Ramp output (0-1)"}
+    ],
+    "related": ["cycle~", "saw~", "count~"],
+    "tags": ["ramp", "phasor", "oscillator", "LFO"],
+    "tags_ja": ["ランプ", "フェイザー", "オシレーター"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "noise~": {
+    "domain": "msp",
+    "category": "oscillator",
+    "description": "White noise generator",
+    "description_ja": "ホワイトノイズジェネレーター",
+    "inlets": [],
+    "outlets": [
+      {"type": "signal", "description": "White noise output"}
+    ],
+    "related": ["pink~", "rand~"],
+    "tags": ["noise", "white noise", "random"],
+    "tags_ja": ["ノイズ", "ホワイトノイズ", "ランダム"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "tri~": {
+    "domain": "msp",
+    "category": "oscillator",
+    "description": "Band-limited triangle wave oscillator",
+    "description_ja": "帯域制限付き三角波オシレーター",
+    "inlets": [
+      {"type": "signal/float", "description": "Frequency in Hz"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Triangle wave output"}
+    ],
+    "related": ["cycle~", "saw~", "rect~"],
+    "tags": ["triangle", "oscillator", "waveform"],
+    "tags_ja": ["三角波", "オシレーター", "波形"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "biquad~": {
+    "domain": "msp",
+    "category": "filter",
+    "description": "Two-pole two-zero IIR filter using raw coefficients",
+    "description_ja": "生の係数を使用する2極2零点IIRフィルター",
+    "inlets": [
+      {"type": "signal", "description": "Signal input"},
+      {"type": "float", "description": "a0 coefficient"},
+      {"type": "float", "description": "a1 coefficient"},
+      {"type": "float", "description": "a2 coefficient"},
+      {"type": "float", "description": "b1 coefficient"},
+      {"type": "float", "description": "b2 coefficient"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Filtered signal output"}
+    ],
+    "related": ["svf~", "lores~", "reson~", "filtercoeff~", "onepole~"],
+    "tags": ["filter", "IIR", "biquad", "EQ"],
+    "tags_ja": ["フィルター", "イコライザー"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "svf~": {
+    "domain": "msp",
+    "category": "filter",
+    "description": "State variable filter with lowpass, highpass, bandpass, and notch outputs",
+    "description_ja": "ローパス、ハイパス、バンドパス、ノッチ出力を持つ状態変数フィルター",
+    "inlets": [
+      {"type": "signal", "description": "Signal input"},
+      {"type": "signal/float", "description": "Cutoff frequency"},
+      {"type": "signal/float", "description": "Resonance (Q)"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Lowpass output"},
+      {"type": "signal", "description": "Highpass output"},
+      {"type": "signal", "description": "Bandpass output"},
+      {"type": "signal", "description": "Notch output"}
+    ],
+    "related": ["biquad~", "lores~", "reson~"],
+    "tags": ["filter", "state variable", "multimode", "lowpass", "highpass", "bandpass"],
+    "tags_ja": ["フィルター", "状態変数", "マルチモード", "ローパス", "ハイパス", "バンドパス"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "lores~": {
+    "domain": "msp",
+    "category": "filter",
+    "description": "Resonant lowpass filter",
+    "description_ja": "レゾナンス付きローパスフィルター",
+    "inlets": [
+      {"type": "signal", "description": "Signal input"},
+      {"type": "signal/float", "description": "Cutoff frequency"},
+      {"type": "signal/float", "description": "Resonance (0-1)"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Filtered signal output"}
+    ],
+    "related": ["svf~", "biquad~", "reson~", "onepole~"],
+    "tags": ["filter", "lowpass", "resonant"],
+    "tags_ja": ["フィルター", "ローパス", "レゾナンス"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "reson~": {
+    "domain": "msp",
+    "category": "filter",
+    "description": "Resonant bandpass filter",
+    "description_ja": "レゾナンス付きバンドパスフィルター",
+    "inlets": [
+      {"type": "signal", "description": "Signal input"},
+      {"type": "signal/float", "description": "Center frequency"},
+      {"type": "signal/float", "description": "Q factor"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Filtered signal output"}
+    ],
+    "related": ["svf~", "biquad~", "lores~"],
+    "tags": ["filter", "bandpass", "resonant"],
+    "tags_ja": ["フィルター", "バンドパス", "レゾナンス"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "onepole~": {
+    "domain": "msp",
+    "category": "filter",
+    "description": "One-pole lowpass filter for smoothing signals",
+    "description_ja": "信号の平滑化用1極ローパスフィルター",
+    "inlets": [
+      {"type": "signal", "description": "Signal input"},
+      {"type": "signal/float", "description": "Cutoff frequency"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Filtered signal output"}
+    ],
+    "related": ["lores~", "slide~", "rampsmooth~"],
+    "tags": ["filter", "lowpass", "smoothing"],
+    "tags_ja": ["フィルター", "ローパス", "スムージング"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "adsr~": {
+    "domain": "msp",
+    "category": "envelope",
+    "description": "ADSR envelope generator with signal output",
+    "description_ja": "信号出力を持つADSRエンベロープジェネレーター",
+    "inlets": [
+      {"type": "signal/float", "description": "Gate (trigger on/off)"},
+      {"type": "float", "description": "Attack time (ms)"},
+      {"type": "float", "description": "Decay time (ms)"},
+      {"type": "float", "description": "Sustain level (0-1)"},
+      {"type": "float", "description": "Release time (ms)"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Envelope output (0-1)"}
+    ],
+    "related": ["line~", "function", "curve~"],
+    "tags": ["envelope", "ADSR", "amplitude", "gate"],
+    "tags_ja": ["エンベロープ", "振幅", "ゲート"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "line~": {
+    "domain": "msp",
+    "category": "envelope",
+    "description": "Signal rate line segment generator",
+    "description_ja": "シグナルレートのラインセグメントジェネレーター",
+    "inlets": [
+      {"type": "list", "description": "Target value, ramp time pairs"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Ramp output"}
+    ],
+    "related": ["adsr~", "line", "curve~", "function"],
+    "tags": ["envelope", "ramp", "interpolation", "automation"],
+    "tags_ja": ["エンベロープ", "ランプ", "補間", "オートメーション"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "function": {
+    "domain": "max",
+    "category": "envelope",
+    "description": "Graphical breakpoint function editor for envelopes and curves",
+    "description_ja": "エンベロープやカーブ用のグラフィカルなブレークポイント関数エディター",
+    "inlets": [
+      {"type": "message", "description": "Messages to set or trigger the function"}
+    ],
+    "outlets": [
+      {"type": "list", "description": "Breakpoint values output"},
+      {"type": "bang", "description": "Bang when function completes"}
+    ],
+    "related": ["line~", "adsr~", "line", "curve~"],
+    "tags": ["envelope", "breakpoint", "GUI", "automation"],
+    "tags_ja": ["エンベロープ", "ブレークポイント", "GUI", "オートメーション"],
+    "rnbo_compatible": false,
+    "size": {"width": 200, "height": 100}
+  },
+  "gain~": {
+    "domain": "msp",
+    "category": "math",
+    "description": "Slider-based signal gain control with dB scaling",
+    "description_ja": "dBスケーリング付きスライダーベースのシグナルゲインコントロール",
+    "inlets": [
+      {"type": "signal", "description": "Signal input"},
+      {"type": "int", "description": "Gain value (0-157)"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Scaled signal output"},
+      {"type": "float", "description": "Current gain value"}
+    ],
+    "related": ["*~", "live.gain~", "mc.gain~"],
+    "tags": ["gain", "volume", "amplitude", "mixer", "UI"],
+    "tags_ja": ["ゲイン", "音量", "振幅", "ミキサー"],
+    "rnbo_compatible": false,
+    "size": {"width": 22, "height": 140}
+  },
+  "*~": {
+    "domain": "msp",
+    "category": "math",
+    "description": "Signal multiplication (multiply two signals or signal by constant)",
+    "description_ja": "信号の乗算（2つの信号の掛け算または信号と定数の掛け算）",
+    "inlets": [
+      {"type": "signal/float", "description": "First operand"},
+      {"type": "signal/float", "description": "Second operand"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Product output"}
+    ],
+    "related": ["+~", "-~", "/~", "gain~"],
+    "tags": ["multiply", "math", "VCA", "amplitude"],
+    "tags_ja": ["乗算", "数学", "振幅"],
+    "rnbo_compatible": true,
+    "size": {"width": 40, "height": 22}
+  },
+  "+~": {
+    "domain": "msp",
+    "category": "math",
+    "description": "Signal addition (add two signals or signal plus constant)",
+    "description_ja": "信号の加算（2つの信号の足し算または信号と定数の足し算）",
+    "inlets": [
+      {"type": "signal/float", "description": "First operand"},
+      {"type": "signal/float", "description": "Second operand"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Sum output"}
+    ],
+    "related": ["*~", "-~", "/~"],
+    "tags": ["add", "math", "mix"],
+    "tags_ja": ["加算", "数学", "ミックス"],
+    "rnbo_compatible": true,
+    "size": {"width": 40, "height": 22}
+  },
+  "-~": {
+    "domain": "msp",
+    "category": "math",
+    "description": "Signal subtraction",
+    "description_ja": "信号の減算",
+    "inlets": [
+      {"type": "signal/float", "description": "First operand"},
+      {"type": "signal/float", "description": "Second operand"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Difference output"}
+    ],
+    "related": ["+~", "*~", "/~"],
+    "tags": ["subtract", "math"],
+    "tags_ja": ["減算", "数学"],
+    "rnbo_compatible": true,
+    "size": {"width": 40, "height": 22}
+  },
+  "clip~": {
+    "domain": "msp",
+    "category": "math",
+    "description": "Clip signal to a specified range",
+    "description_ja": "信号を指定範囲にクリッピング",
+    "inlets": [
+      {"type": "signal", "description": "Signal input"},
+      {"type": "signal/float", "description": "Minimum value"},
+      {"type": "signal/float", "description": "Maximum value"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Clipped signal output"}
+    ],
+    "related": ["scale~", "clip"],
+    "tags": ["clip", "limit", "distortion", "math"],
+    "tags_ja": ["クリップ", "リミット", "歪み", "数学"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "scale~": {
+    "domain": "msp",
+    "category": "math",
+    "description": "Map signal from one range to another",
+    "description_ja": "信号を一つの範囲から別の範囲にマッピング",
+    "inlets": [
+      {"type": "signal", "description": "Signal input"},
+      {"type": "float", "description": "Input low"},
+      {"type": "float", "description": "Input high"},
+      {"type": "float", "description": "Output low"},
+      {"type": "float", "description": "Output high"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Scaled signal output"}
+    ],
+    "related": ["clip~", "scale"],
+    "tags": ["scale", "map", "range", "math"],
+    "tags_ja": ["スケール", "マッピング", "範囲", "数学"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "adc~": {
+    "domain": "msp",
+    "category": "io",
+    "description": "Audio input from hardware audio interface (analog-to-digital converter)",
+    "description_ja": "ハードウェアオーディオインターフェースからの音声入力（AD変換器）",
+    "inlets": [
+      {"type": "message", "description": "Channel configuration messages"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Audio input channel 1"},
+      {"type": "signal", "description": "Audio input channel 2"}
+    ],
+    "related": ["dac~", "ezadc~", "ezdac~"],
+    "tags": ["input", "audio", "microphone", "interface", "ADC"],
+    "tags_ja": ["入力", "オーディオ", "マイク", "インターフェース"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "dac~": {
+    "domain": "msp",
+    "category": "io",
+    "description": "Audio output to hardware audio interface (digital-to-analog converter)",
+    "description_ja": "ハードウェアオーディオインターフェースへの音声出力（DA変換器）",
+    "inlets": [
+      {"type": "signal", "description": "Audio output channel 1"},
+      {"type": "signal", "description": "Audio output channel 2"}
+    ],
+    "outlets": [],
+    "related": ["adc~", "ezdac~", "ezadc~"],
+    "tags": ["output", "audio", "speaker", "interface", "DAC"],
+    "tags_ja": ["出力", "オーディオ", "スピーカー", "インターフェース"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "ezdac~": {
+    "domain": "msp",
+    "category": "io",
+    "description": "Easy DAC - clickable audio output toggle with speaker icon",
+    "description_ja": "クリック可能なスピーカーアイコン付きオーディオ出力トグル",
+    "inlets": [
+      {"type": "signal", "description": "Audio output channel 1"},
+      {"type": "signal", "description": "Audio output channel 2"}
+    ],
+    "outlets": [],
+    "related": ["dac~", "ezadc~", "adc~"],
+    "tags": ["output", "audio", "speaker", "toggle", "UI"],
+    "tags_ja": ["出力", "オーディオ", "スピーカー", "トグル"],
+    "rnbo_compatible": false,
+    "size": {"width": 45, "height": 45}
+  },
+  "ezadc~": {
+    "domain": "msp",
+    "category": "io",
+    "description": "Easy ADC - clickable audio input toggle with microphone icon",
+    "description_ja": "クリック可能なマイクアイコン付きオーディオ入力トグル",
+    "inlets": [
+      {"type": "message", "description": "Start/stop audio"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Audio input channel 1"},
+      {"type": "signal", "description": "Audio input channel 2"}
+    ],
+    "related": ["adc~", "ezdac~", "dac~"],
+    "tags": ["input", "audio", "microphone", "toggle", "UI"],
+    "tags_ja": ["入力", "オーディオ", "マイク", "トグル"],
+    "rnbo_compatible": false,
+    "size": {"width": 45, "height": 45}
+  },
+  "delay~": {
+    "domain": "msp",
+    "category": "effect",
+    "description": "Simple signal delay line (use with feedback for echo effects)",
+    "description_ja": "シンプルな信号ディレイライン（フィードバックでエコー効果）",
+    "inlets": [
+      {"type": "signal", "description": "Signal input"},
+      {"type": "signal/float", "description": "Delay time in samples"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Delayed signal output"}
+    ],
+    "related": ["tapin~", "tapout~"],
+    "tags": ["delay", "echo", "effect"],
+    "tags_ja": ["ディレイ", "エコー", "エフェクト"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "tapin~": {
+    "domain": "msp",
+    "category": "effect",
+    "description": "Write audio into a delay line buffer (use with tapout~)",
+    "description_ja": "ディレイラインバッファに音声を書き込む（tapout~と併用）",
+    "inlets": [
+      {"type": "signal", "description": "Signal input"}
+    ],
+    "outlets": [
+      {"type": "tapconnection", "description": "Connect to tapout~"}
+    ],
+    "related": ["tapout~", "delay~"],
+    "tags": ["delay", "buffer", "effect"],
+    "tags_ja": ["ディレイ", "バッファ", "エフェクト"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "tapout~": {
+    "domain": "msp",
+    "category": "effect",
+    "description": "Read audio from a tapin~ delay line at specified delay time",
+    "description_ja": "tapin~ディレイラインから指定時間だけ遅延した音声を読み出す",
+    "inlets": [
+      {"type": "tapconnection", "description": "Connect from tapin~"},
+      {"type": "signal/float", "description": "Delay time in ms"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Delayed signal output"}
+    ],
+    "related": ["tapin~", "delay~"],
+    "tags": ["delay", "tap", "effect"],
+    "tags_ja": ["ディレイ", "タップ", "エフェクト"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "reverb~": {
+    "domain": "msp",
+    "category": "effect",
+    "description": "Built-in reverb effect processor",
+    "description_ja": "内蔵リバーブエフェクトプロセッサー",
+    "inlets": [
+      {"type": "signal", "description": "Signal input left"},
+      {"type": "signal", "description": "Signal input right"},
+      {"type": "float", "description": "Decay time"},
+      {"type": "float", "description": "Damping"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Reverb output left"},
+      {"type": "signal", "description": "Reverb output right"}
+    ],
+    "related": ["tapin~", "tapout~", "freeverb~"],
+    "tags": ["reverb", "space", "effect", "ambience"],
+    "tags_ja": ["リバーブ", "空間", "エフェクト", "残響"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "fft~": {
+    "domain": "msp",
+    "category": "analysis",
+    "description": "Fast Fourier Transform - convert time domain signal to frequency domain",
+    "description_ja": "高速フーリエ変換 - 時間領域信号を周波数領域に変換",
+    "inlets": [
+      {"type": "signal", "description": "Signal input (real)"},
+      {"type": "signal", "description": "Signal input (imaginary)"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Real part output"},
+      {"type": "signal", "description": "Imaginary part output"},
+      {"type": "signal", "description": "Sync output"}
+    ],
+    "related": ["ifft~", "pfft~", "cartopol~", "poltocar~"],
+    "tags": ["FFT", "spectral", "analysis", "frequency"],
+    "tags_ja": ["FFT", "スペクトル", "解析", "周波数"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "ifft~": {
+    "domain": "msp",
+    "category": "analysis",
+    "description": "Inverse Fast Fourier Transform - convert frequency domain back to time domain",
+    "description_ja": "逆高速フーリエ変換 - 周波数領域から時間領域に変換",
+    "inlets": [
+      {"type": "signal", "description": "Real part input"},
+      {"type": "signal", "description": "Imaginary part input"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Signal output (real)"},
+      {"type": "signal", "description": "Signal output (imaginary)"},
+      {"type": "signal", "description": "Sync output"}
+    ],
+    "related": ["fft~", "pfft~"],
+    "tags": ["IFFT", "spectral", "synthesis", "frequency"],
+    "tags_ja": ["IFFT", "スペクトル", "合成", "周波数"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "peakamp~": {
+    "domain": "msp",
+    "category": "analysis",
+    "description": "Report peak amplitude of a signal over a specified interval",
+    "description_ja": "指定間隔での信号のピーク振幅を報告",
+    "inlets": [
+      {"type": "signal", "description": "Signal input"},
+      {"type": "int", "description": "Reporting interval in ms"}
+    ],
+    "outlets": [
+      {"type": "float", "description": "Peak amplitude value"}
+    ],
+    "related": ["average~", "snapshot~", "meter~"],
+    "tags": ["analysis", "amplitude", "peak", "metering"],
+    "tags_ja": ["解析", "振幅", "ピーク", "メーター"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "average~": {
+    "domain": "msp",
+    "category": "analysis",
+    "description": "Compute running average (RMS or mean) of a signal",
+    "description_ja": "信号の移動平均（RMSまたは平均）を計算",
+    "inlets": [
+      {"type": "signal", "description": "Signal input"},
+      {"type": "int", "description": "Number of samples to average"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Averaged signal output"}
+    ],
+    "related": ["peakamp~", "snapshot~"],
+    "tags": ["analysis", "average", "RMS", "smoothing"],
+    "tags_ja": ["解析", "平均", "RMS", "スムージング"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "snapshot~": {
+    "domain": "msp",
+    "category": "analysis",
+    "description": "Sample a signal value and output it as a number at regular intervals",
+    "description_ja": "信号値を定期的にサンプリングして数値として出力",
+    "inlets": [
+      {"type": "signal", "description": "Signal to sample"},
+      {"type": "bang/int", "description": "Trigger or interval in ms"}
+    ],
+    "outlets": [
+      {"type": "float", "description": "Sampled value"}
+    ],
+    "related": ["peakamp~", "number~", "meter~"],
+    "tags": ["analysis", "sample", "signal to number", "monitoring"],
+    "tags_ja": ["解析", "サンプリング", "信号変換", "モニタリング"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "meter~": {
+    "domain": "msp",
+    "category": "analysis",
+    "description": "Signal level meter with LED-style display",
+    "description_ja": "LED風表示のシグナルレベルメーター",
+    "inlets": [
+      {"type": "signal", "description": "Signal input"}
+    ],
+    "outlets": [
+      {"type": "float", "description": "Peak level (dB)"}
+    ],
+    "related": ["peakamp~", "snapshot~", "gain~"],
+    "tags": ["meter", "level", "dB", "monitoring", "UI"],
+    "tags_ja": ["メーター", "レベル", "dB", "モニタリング"],
+    "rnbo_compatible": false,
+    "size": {"width": 24, "height": 80}
+  },
+  "buffer~": {
+    "domain": "msp",
+    "category": "buffer",
+    "description": "Store audio samples in memory for playback and manipulation",
+    "description_ja": "再生や操作のためにオーディオサンプルをメモリに保存",
+    "inlets": [
+      {"type": "message", "description": "File read, size, and other messages"}
+    ],
+    "outlets": [
+      {"type": "bang", "description": "Bang when buffer is loaded"},
+      {"type": "float", "description": "Buffer length in ms"}
+    ],
+    "related": ["play~", "groove~", "record~", "waveform~", "peek~"],
+    "tags": ["buffer", "sample", "memory", "audio file"],
+    "tags_ja": ["バッファ", "サンプル", "メモリ", "オーディオファイル"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "play~": {
+    "domain": "msp",
+    "category": "buffer",
+    "description": "Play back audio from a buffer~ with sample-accurate positioning",
+    "description_ja": "buffer~からサンプル精度で音声を再生",
+    "inlets": [
+      {"type": "signal", "description": "Playback position in ms"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Audio output channel 1"},
+      {"type": "signal", "description": "Audio output channel 2"}
+    ],
+    "related": ["buffer~", "groove~", "wave~"],
+    "tags": ["playback", "buffer", "sample"],
+    "tags_ja": ["再生", "バッファ", "サンプル"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "groove~": {
+    "domain": "msp",
+    "category": "buffer",
+    "description": "Variable-rate looping playback from a buffer~ with loop points",
+    "description_ja": "buffer~からの可変速度ループ再生（ループポイント付き）",
+    "inlets": [
+      {"type": "signal/float", "description": "Playback speed (1=normal)"},
+      {"type": "float", "description": "Loop start in ms"},
+      {"type": "float", "description": "Loop end in ms"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Audio output channel 1"},
+      {"type": "signal", "description": "Audio output channel 2"},
+      {"type": "signal", "description": "Sync output (0-1 position)"}
+    ],
+    "related": ["buffer~", "play~", "wave~", "waveform~"],
+    "tags": ["playback", "loop", "buffer", "sampler", "speed"],
+    "tags_ja": ["再生", "ループ", "バッファ", "サンプラー", "速度"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "record~": {
+    "domain": "msp",
+    "category": "buffer",
+    "description": "Record audio signal into a buffer~",
+    "description_ja": "オーディオ信号をbuffer~に録音",
+    "inlets": [
+      {"type": "signal", "description": "Signal to record (ch1)"},
+      {"type": "signal", "description": "Signal to record (ch2)"},
+      {"type": "int", "description": "Record on/off (1/0)"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Recording position sync"}
+    ],
+    "related": ["buffer~", "play~", "groove~"],
+    "tags": ["record", "buffer", "capture", "sample"],
+    "tags_ja": ["録音", "バッファ", "キャプチャ", "サンプル"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "sfplay~": {
+    "domain": "msp",
+    "category": "buffer",
+    "description": "Stream audio playback directly from a sound file on disk",
+    "description_ja": "ディスク上のサウンドファイルから直接ストリーミング再生",
+    "inlets": [
+      {"type": "message", "description": "Open, start, stop, and transport messages"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Audio output channel 1"},
+      {"type": "signal", "description": "Audio output channel 2"},
+      {"type": "bang", "description": "Bang when file ends"}
+    ],
+    "related": ["buffer~", "sfrecord~", "playlist~"],
+    "tags": ["playback", "file", "stream", "disk"],
+    "tags_ja": ["再生", "ファイル", "ストリーミング", "ディスク"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "waveform~": {
+    "domain": "msp",
+    "category": "buffer",
+    "description": "Display and edit buffer~ contents with selection region",
+    "description_ja": "buffer~の内容を表示・編集（選択領域付き）",
+    "inlets": [
+      {"type": "message", "description": "Buffer name and display messages"}
+    ],
+    "outlets": [
+      {"type": "float", "description": "Selection start (ms)"},
+      {"type": "float", "description": "Selection end (ms)"},
+      {"type": "float", "description": "Current display position"}
+    ],
+    "related": ["buffer~", "groove~", "play~"],
+    "tags": ["display", "waveform", "buffer", "UI", "editor"],
+    "tags_ja": ["表示", "波形", "バッファ", "UI", "エディター"],
+    "rnbo_compatible": false,
+    "size": {"width": 300, "height": 100}
+  },
+  "vst~": {
+    "domain": "msp",
+    "category": "plugin",
+    "description": "Host VST/AU audio plugins inside Max",
+    "description_ja": "Max内でVST/AUオーディオプラグインをホスト",
+    "inlets": [
+      {"type": "signal", "description": "Audio input channel 1"},
+      {"type": "signal", "description": "Audio input channel 2"},
+      {"type": "message", "description": "Plugin control messages"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Audio output channel 1"},
+      {"type": "signal", "description": "Audio output channel 2"}
+    ],
+    "related": ["amxd~", "poly~"],
+    "tags": ["VST", "AU", "plugin", "effect", "instrument"],
+    "tags_ja": ["VST", "AU", "プラグイン", "エフェクト", "インストゥルメント"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "poly~": {
+    "domain": "msp",
+    "category": "voice",
+    "description": "Polyphonic voice manager - load a patcher and create multiple instances",
+    "description_ja": "ポリフォニックボイスマネージャー - パッチャーの複数インスタンスを管理",
+    "inlets": [
+      {"type": "message", "description": "Note, MIDI, target, and control messages"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Mixed audio output (configurable)"}
+    ],
+    "related": ["thispoly~", "in~", "out~", "mc.poly~"],
+    "tags": ["polyphony", "voice", "instance", "synth"],
+    "tags_ja": ["ポリフォニー", "ボイス", "インスタンス", "シンセ"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "mc.cycle~": {
+    "domain": "msp",
+    "category": "mc",
+    "description": "Multichannel sine wave oscillator",
+    "description_ja": "マルチチャンネルサイン波オシレーター",
+    "inlets": [
+      {"type": "multichannelsignal/float", "description": "Frequency in Hz"},
+      {"type": "multichannelsignal/float", "description": "Phase offset"}
+    ],
+    "outlets": [
+      {"type": "multichannelsignal", "description": "Multichannel sine output"}
+    ],
+    "related": ["cycle~", "mc.saw~", "mc.rect~"],
+    "tags": ["multichannel", "mc", "sine", "oscillator"],
+    "tags_ja": ["マルチチャンネル", "サイン波", "オシレーター"],
+    "rnbo_compatible": false,
+    "size": {"width": 100, "height": 22}
+  },
+  "mc.gain~": {
+    "domain": "msp",
+    "category": "mc",
+    "description": "Multichannel gain control slider",
+    "description_ja": "マルチチャンネルゲインコントロールスライダー",
+    "inlets": [
+      {"type": "multichannelsignal", "description": "Multichannel signal input"},
+      {"type": "int", "description": "Gain value"}
+    ],
+    "outlets": [
+      {"type": "multichannelsignal", "description": "Multichannel scaled output"},
+      {"type": "float", "description": "Current gain value"}
+    ],
+    "related": ["gain~", "mc.cycle~", "mc.mixdown~"],
+    "tags": ["multichannel", "mc", "gain", "volume"],
+    "tags_ja": ["マルチチャンネル", "ゲイン", "音量"],
+    "rnbo_compatible": false,
+    "size": {"width": 22, "height": 140}
+  },
+  "mc.mixdown~": {
+    "domain": "msp",
+    "category": "mc",
+    "description": "Mix multichannel signal down to fewer channels",
+    "description_ja": "マルチチャンネル信号を少ないチャンネルにミックスダウン",
+    "inlets": [
+      {"type": "multichannelsignal", "description": "Multichannel signal input"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Mixed mono/stereo output"}
+    ],
+    "related": ["mc.gain~", "mc.pack~", "mc.unpack~"],
+    "tags": ["multichannel", "mc", "mixdown", "stereo"],
+    "tags_ja": ["マルチチャンネル", "ミックスダウン", "ステレオ"],
+    "rnbo_compatible": false,
+    "size": {"width": 100, "height": 22}
+  },
+  "jit.grab": {
+    "domain": "jitter",
+    "category": "input",
+    "description": "Capture video frames from a connected camera",
+    "description_ja": "接続されたカメラからビデオフレームをキャプチャ",
+    "inlets": [
+      {"type": "bang/message", "description": "Trigger capture or settings"}
+    ],
+    "outlets": [
+      {"type": "jit_matrix", "description": "Captured frame as matrix"}
+    ],
+    "related": ["jit.movie", "jit.window", "jit.pwindow"],
+    "tags": ["camera", "capture", "video", "webcam", "input"],
+    "tags_ja": ["カメラ", "キャプチャ", "ビデオ", "ウェブカム", "入力"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "jit.movie": {
+    "domain": "jitter",
+    "category": "input",
+    "description": "Play video files with transport controls",
+    "description_ja": "トランスポートコントロール付きビデオファイル再生",
+    "inlets": [
+      {"type": "bang/message", "description": "Trigger frame or transport messages"}
+    ],
+    "outlets": [
+      {"type": "jit_matrix", "description": "Video frame as matrix"},
+      {"type": "message", "description": "Movie information"}
+    ],
+    "related": ["jit.grab", "jit.playlist", "jit.window"],
+    "tags": ["movie", "video", "playback", "file"],
+    "tags_ja": ["動画", "ビデオ", "再生", "ファイル"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "jit.window": {
+    "domain": "jitter",
+    "category": "output",
+    "description": "Display Jitter matrices or OpenGL rendering in a floating window",
+    "description_ja": "フローティングウィンドウでJitterマトリックスやOpenGLレンダリングを表示",
+    "inlets": [
+      {"type": "jit_matrix/message", "description": "Matrix or rendering context"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Mouse and window events"}
+    ],
+    "related": ["jit.pwindow", "jit.gl.render"],
+    "tags": ["window", "display", "video", "output"],
+    "tags_ja": ["ウィンドウ", "表示", "ビデオ", "出力"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "jit.pwindow": {
+    "domain": "jitter",
+    "category": "output",
+    "description": "Display Jitter matrices or OpenGL rendering embedded in the patcher",
+    "description_ja": "パッチャーに埋め込んでJitterマトリックスやOpenGLレンダリングを表示",
+    "inlets": [
+      {"type": "jit_matrix/message", "description": "Matrix or rendering context"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Mouse events"}
+    ],
+    "related": ["jit.window", "jit.gl.render"],
+    "tags": ["display", "embedded", "video", "output", "UI"],
+    "tags_ja": ["表示", "埋め込み", "ビデオ", "出力"],
+    "rnbo_compatible": false,
+    "size": {"width": 160, "height": 120}
+  },
+  "jit.op": {
+    "domain": "jitter",
+    "category": "processing",
+    "description": "Perform mathematical operations on Jitter matrices",
+    "description_ja": "Jitterマトリックスに対して数学演算を実行",
+    "inlets": [
+      {"type": "jit_matrix", "description": "Input matrix 1"},
+      {"type": "jit_matrix", "description": "Input matrix 2 (optional)"}
+    ],
+    "outlets": [
+      {"type": "jit_matrix", "description": "Result matrix"}
+    ],
+    "related": ["jit.brcosa", "jit.expr"],
+    "tags": ["math", "matrix", "processing", "operation"],
+    "tags_ja": ["数学", "マトリックス", "処理", "演算"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "jit.brcosa": {
+    "domain": "jitter",
+    "category": "processing",
+    "description": "Adjust brightness, contrast, and saturation of a matrix",
+    "description_ja": "マトリックスの明るさ、コントラスト、彩度を調整",
+    "inlets": [
+      {"type": "jit_matrix", "description": "Input matrix"}
+    ],
+    "outlets": [
+      {"type": "jit_matrix", "description": "Adjusted matrix"}
+    ],
+    "related": ["jit.op", "jit.chromakey"],
+    "tags": ["brightness", "contrast", "saturation", "color", "processing"],
+    "tags_ja": ["明るさ", "コントラスト", "彩度", "色", "処理"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "jit.chromakey": {
+    "domain": "jitter",
+    "category": "processing",
+    "description": "Chroma key compositing (green screen) for video matrices",
+    "description_ja": "ビデオマトリックスのクロマキー合成（グリーンスクリーン）",
+    "inlets": [
+      {"type": "jit_matrix", "description": "Foreground matrix"},
+      {"type": "jit_matrix", "description": "Background matrix"}
+    ],
+    "outlets": [
+      {"type": "jit_matrix", "description": "Composited result matrix"}
+    ],
+    "related": ["jit.op", "jit.brcosa", "jit.alphablend"],
+    "tags": ["chroma key", "green screen", "compositing", "video"],
+    "tags_ja": ["クロマキー", "グリーンスクリーン", "合成", "ビデオ"],
+    "rnbo_compatible": false,
+    "size": {"width": 100, "height": 22}
+  },
+  "jit.gl.mesh": {
+    "domain": "jitter",
+    "category": "gl",
+    "description": "Render 3D mesh geometry from matrix data in OpenGL",
+    "description_ja": "マトリックスデータからOpenGLで3Dメッシュジオメトリをレンダリング",
+    "inlets": [
+      {"type": "jit_matrix/message", "description": "Vertex matrix or messages"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Draw output"}
+    ],
+    "related": ["jit.gl.gridshape", "jit.gl.render", "jit.gl.material"],
+    "tags": ["3D", "mesh", "OpenGL", "geometry", "rendering"],
+    "tags_ja": ["3D", "メッシュ", "OpenGL", "ジオメトリ", "レンダリング"],
+    "rnbo_compatible": false,
+    "size": {"width": 100, "height": 22}
+  },
+  "jit.gl.gridshape": {
+    "domain": "jitter",
+    "category": "gl",
+    "description": "Generate and render common 3D shapes (sphere, torus, cube, etc.) in OpenGL",
+    "description_ja": "OpenGLで基本3D形状（球体、トーラス、立方体等）を生成・レンダリング",
+    "inlets": [
+      {"type": "message", "description": "Shape type and attribute messages"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Draw output"}
+    ],
+    "related": ["jit.gl.mesh", "jit.gl.render", "jit.gl.camera"],
+    "tags": ["3D", "shape", "OpenGL", "sphere", "cube", "torus"],
+    "tags_ja": ["3D", "形状", "OpenGL", "球体", "立方体", "トーラス"],
+    "rnbo_compatible": false,
+    "size": {"width": 120, "height": 22}
+  },
+  "jit.gl.camera": {
+    "domain": "jitter",
+    "category": "gl",
+    "description": "OpenGL camera for controlling the 3D viewpoint",
+    "description_ja": "3Dビューポイントを制御するOpenGLカメラ",
+    "inlets": [
+      {"type": "message", "description": "Position, lookat, and attribute messages"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Camera output"}
+    ],
+    "related": ["jit.gl.render", "jit.gl.gridshape", "jit.anim.drive"],
+    "tags": ["camera", "3D", "viewpoint", "OpenGL", "navigation"],
+    "tags_ja": ["カメラ", "3D", "視点", "OpenGL", "ナビゲーション"],
+    "rnbo_compatible": false,
+    "size": {"width": 120, "height": 22}
+  },
+  "jit.gl.render": {
+    "domain": "jitter",
+    "category": "gl",
+    "description": "Main OpenGL rendering context manager",
+    "description_ja": "メインのOpenGLレンダリングコンテキストマネージャー",
+    "inlets": [
+      {"type": "bang/message", "description": "Trigger render or settings"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Rendering context output"}
+    ],
+    "related": ["jit.gl.camera", "jit.gl.gridshape", "jit.window", "jit.world"],
+    "tags": ["render", "OpenGL", "3D", "context"],
+    "tags_ja": ["レンダリング", "OpenGL", "3D", "コンテキスト"],
+    "rnbo_compatible": false,
+    "size": {"width": 120, "height": 22}
+  },
+  "jit.world": {
+    "domain": "jitter",
+    "category": "gl",
+    "description": "All-in-one OpenGL world with built-in rendering, window, and camera",
+    "description_ja": "レンダリング、ウィンドウ、カメラ内蔵のオールインワンOpenGLワールド",
+    "inlets": [
+      {"type": "bang/message", "description": "Trigger render bang or settings"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Context output"},
+      {"type": "jit_matrix", "description": "Rendered frame as matrix"}
+    ],
+    "related": ["jit.gl.render", "jit.window", "jit.gl.camera"],
+    "tags": ["world", "OpenGL", "3D", "rendering", "all-in-one"],
+    "tags_ja": ["ワールド", "OpenGL", "3D", "レンダリング", "オールインワン"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "jit.gl.texture": {
+    "domain": "jitter",
+    "category": "gl",
+    "description": "Create and manage OpenGL textures from matrices or rendering",
+    "description_ja": "マトリックスやレンダリングからOpenGLテクスチャを作成・管理",
+    "inlets": [
+      {"type": "jit_matrix/message", "description": "Matrix input or texture messages"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Texture name output"}
+    ],
+    "related": ["jit.gl.render", "jit.gl.mesh", "jit.gl.videoplane"],
+    "tags": ["texture", "OpenGL", "GPU", "image"],
+    "tags_ja": ["テクスチャ", "OpenGL", "GPU", "画像"],
+    "rnbo_compatible": false,
+    "size": {"width": 120, "height": 22}
+  },
+  "jit.gl.videoplane": {
+    "domain": "jitter",
+    "category": "gl",
+    "description": "Display a texture on a flat plane in OpenGL space",
+    "description_ja": "OpenGL空間で平面にテクスチャを表示",
+    "inlets": [
+      {"type": "jit_matrix/message", "description": "Texture or matrix input"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Draw output"}
+    ],
+    "related": ["jit.gl.texture", "jit.gl.render", "jit.gl.mesh"],
+    "tags": ["video", "plane", "texture", "OpenGL", "display"],
+    "tags_ja": ["ビデオ", "平面", "テクスチャ", "OpenGL", "表示"],
+    "rnbo_compatible": false,
+    "size": {"width": 120, "height": 22}
+  },
+  "jit.fx.vhs": {
+    "domain": "jitter",
+    "category": "fx",
+    "description": "VHS-style video degradation effect",
+    "description_ja": "VHS風ビデオ劣化エフェクト",
+    "inlets": [
+      {"type": "jit_matrix/texture", "description": "Video input"}
+    ],
+    "outlets": [
+      {"type": "jit_matrix/texture", "description": "Processed output"}
+    ],
+    "related": ["jit.fx.crt", "jit.gl.pix"],
+    "tags": ["effect", "VHS", "retro", "degradation", "video"],
+    "tags_ja": ["エフェクト", "VHS", "レトロ", "劣化", "ビデオ"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "jit.fx.crt": {
+    "domain": "jitter",
+    "category": "fx",
+    "description": "CRT monitor simulation effect with scanlines and curvature",
+    "description_ja": "スキャンラインと歪みを持つCRTモニターシミュレーションエフェクト",
+    "inlets": [
+      {"type": "jit_matrix/texture", "description": "Video input"}
+    ],
+    "outlets": [
+      {"type": "jit_matrix/texture", "description": "Processed output"}
+    ],
+    "related": ["jit.fx.vhs", "jit.gl.pix"],
+    "tags": ["effect", "CRT", "retro", "scanline", "video"],
+    "tags_ja": ["エフェクト", "CRT", "レトロ", "スキャンライン", "ビデオ"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "button": {
+    "domain": "max",
+    "category": "ui",
+    "description": "Bang button - outputs a bang when clicked",
+    "description_ja": "バンボタン - クリックするとbangを出力",
+    "inlets": [
+      {"type": "bang", "description": "Trigger bang input"}
+    ],
+    "outlets": [
+      {"type": "bang", "description": "Bang output"}
+    ],
+    "related": ["toggle", "bang", "trigger"],
+    "tags": ["button", "bang", "trigger", "UI"],
+    "tags_ja": ["ボタン", "バン", "トリガー"],
+    "rnbo_compatible": false,
+    "size": {"width": 24, "height": 24}
+  },
+  "toggle": {
+    "domain": "max",
+    "category": "ui",
+    "description": "On/off toggle switch - outputs 0 or 1",
+    "description_ja": "オン/オフトグルスイッチ - 0または1を出力",
+    "inlets": [
+      {"type": "int/bang", "description": "Set or toggle state"}
+    ],
+    "outlets": [
+      {"type": "int", "description": "0 or 1 output"}
+    ],
+    "related": ["button", "gate"],
+    "tags": ["toggle", "switch", "on/off", "UI"],
+    "tags_ja": ["トグル", "スイッチ", "オンオフ"],
+    "rnbo_compatible": false,
+    "size": {"width": 24, "height": 24}
+  },
+  "slider": {
+    "domain": "max",
+    "category": "ui",
+    "description": "Vertical or horizontal slider outputting integer values",
+    "description_ja": "整数値を出力する垂直/水平スライダー",
+    "inlets": [
+      {"type": "int", "description": "Set slider value"}
+    ],
+    "outlets": [
+      {"type": "int", "description": "Current value"}
+    ],
+    "related": ["dial", "live.slider", "flonum"],
+    "tags": ["slider", "control", "UI", "range"],
+    "tags_ja": ["スライダー", "コントロール", "範囲"],
+    "rnbo_compatible": false,
+    "size": {"width": 22, "height": 140}
+  },
+  "dial": {
+    "domain": "max",
+    "category": "ui",
+    "description": "Rotary dial control outputting integer values",
+    "description_ja": "整数値を出力する回転ダイアルコントロール",
+    "inlets": [
+      {"type": "int", "description": "Set dial value"}
+    ],
+    "outlets": [
+      {"type": "int", "description": "Current value"}
+    ],
+    "related": ["slider", "live.dial", "knob"],
+    "tags": ["dial", "knob", "rotary", "control", "UI"],
+    "tags_ja": ["ダイアル", "ノブ", "回転", "コントロール"],
+    "rnbo_compatible": false,
+    "size": {"width": 64, "height": 64}
+  },
+  "umenu": {
+    "domain": "max",
+    "category": "ui",
+    "description": "Pop-up menu for selecting from a list of items",
+    "description_ja": "アイテムリストから選択するポップアップメニュー",
+    "inlets": [
+      {"type": "message", "description": "Item index, append, clear, and other messages"}
+    ],
+    "outlets": [
+      {"type": "int", "description": "Selected item index"},
+      {"type": "message", "description": "Selected item text"}
+    ],
+    "related": ["live.menu", "tab"],
+    "tags": ["menu", "dropdown", "selection", "list", "UI"],
+    "tags_ja": ["メニュー", "ドロップダウン", "選択", "リスト"],
+    "rnbo_compatible": false,
+    "size": {"width": 100, "height": 22}
+  },
+  "live.dial": {
+    "domain": "max",
+    "category": "ui",
+    "description": "Ableton Live style dial control with value display and label",
+    "description_ja": "値表示とラベル付きAbleton Liveスタイルのダイアルコントロール",
+    "inlets": [
+      {"type": "float", "description": "Set value"}
+    ],
+    "outlets": [
+      {"type": "float", "description": "Current value"}
+    ],
+    "related": ["dial", "live.slider", "live.numbox"],
+    "tags": ["dial", "Live", "control", "UI", "M4L"],
+    "tags_ja": ["ダイアル", "Live", "コントロール", "M4L"],
+    "rnbo_compatible": false,
+    "size": {"width": 50, "height": 62}
+  },
+  "live.slider": {
+    "domain": "max",
+    "category": "ui",
+    "description": "Ableton Live style slider control",
+    "description_ja": "Ableton Liveスタイルのスライダーコントロール",
+    "inlets": [
+      {"type": "float", "description": "Set value"}
+    ],
+    "outlets": [
+      {"type": "float", "description": "Current value"}
+    ],
+    "related": ["slider", "live.dial", "live.numbox"],
+    "tags": ["slider", "Live", "control", "UI", "M4L"],
+    "tags_ja": ["スライダー", "Live", "コントロール", "M4L"],
+    "rnbo_compatible": false,
+    "size": {"width": 40, "height": 140}
+  },
+  "number": {
+    "domain": "max",
+    "category": "ui",
+    "description": "Integer number box - display and edit integer values",
+    "description_ja": "整数ナンバーボックス - 整数値の表示と編集",
+    "inlets": [
+      {"type": "int", "description": "Set value"}
+    ],
+    "outlets": [
+      {"type": "int", "description": "Current value"}
+    ],
+    "related": ["flonum", "number~", "live.numbox"],
+    "tags": ["number", "integer", "display", "input", "UI"],
+    "tags_ja": ["数値", "整数", "表示", "入力"],
+    "rnbo_compatible": false,
+    "size": {"width": 50, "height": 22}
+  },
+  "flonum": {
+    "domain": "max",
+    "category": "ui",
+    "description": "Floating-point number box - display and edit decimal values",
+    "description_ja": "浮動小数点ナンバーボックス - 小数値の表示と編集",
+    "inlets": [
+      {"type": "float", "description": "Set value"}
+    ],
+    "outlets": [
+      {"type": "float", "description": "Current value"}
+    ],
+    "related": ["number", "live.numbox"],
+    "tags": ["number", "float", "decimal", "display", "input", "UI"],
+    "tags_ja": ["数値", "浮動小数点", "表示", "入力"],
+    "rnbo_compatible": false,
+    "size": {"width": 50, "height": 22}
+  },
+  "message": {
+    "domain": "max",
+    "category": "ui",
+    "description": "Display and send a message when clicked",
+    "description_ja": "クリックするとメッセージを表示・送信",
+    "inlets": [
+      {"type": "message", "description": "Set message content or trigger with bang"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Message output"}
+    ],
+    "related": ["comment", "print"],
+    "tags": ["message", "text", "send", "UI"],
+    "tags_ja": ["メッセージ", "テキスト", "送信"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "comment": {
+    "domain": "max",
+    "category": "ui",
+    "description": "Non-functional text comment for annotation in the patcher",
+    "description_ja": "パッチャー内の注釈用テキストコメント（機能なし）",
+    "inlets": [],
+    "outlets": [],
+    "related": ["message", "panel"],
+    "tags": ["comment", "text", "label", "annotation", "UI"],
+    "tags_ja": ["コメント", "テキスト", "ラベル", "注釈"],
+    "rnbo_compatible": false,
+    "size": {"width": 100, "height": 20}
+  },
+  "send": {
+    "domain": "max",
+    "category": "messaging",
+    "description": "Send messages wirelessly to a named receive object",
+    "description_ja": "名前付きreceiveオブジェクトにワイヤレスでメッセージを送信",
+    "inlets": [
+      {"type": "message", "description": "Message to send"}
+    ],
+    "outlets": [],
+    "related": ["receive", "forward", "value"],
+    "tags": ["send", "wireless", "messaging", "remote"],
+    "tags_ja": ["送信", "ワイヤレス", "メッセージング", "リモート"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "receive": {
+    "domain": "max",
+    "category": "messaging",
+    "description": "Receive messages wirelessly from a named send object",
+    "description_ja": "名前付きsendオブジェクトからワイヤレスでメッセージを受信",
+    "inlets": [
+      {"type": "message", "description": "Set receive name"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Received message"}
+    ],
+    "related": ["send", "forward", "value"],
+    "tags": ["receive", "wireless", "messaging", "remote"],
+    "tags_ja": ["受信", "ワイヤレス", "メッセージング", "リモート"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "print": {
+    "domain": "max",
+    "category": "messaging",
+    "description": "Print messages to the Max console window",
+    "description_ja": "Maxコンソールウィンドウにメッセージを表示",
+    "inlets": [
+      {"type": "message", "description": "Any message to print"}
+    ],
+    "outlets": [],
+    "related": ["send", "comment"],
+    "tags": ["print", "console", "debug", "log"],
+    "tags_ja": ["表示", "コンソール", "デバッグ", "ログ"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "forward": {
+    "domain": "max",
+    "category": "messaging",
+    "description": "Send messages to a named receive with dynamically changeable destination",
+    "description_ja": "動的に変更可能な宛先を持つ名前付きreceiveへのメッセージ送信",
+    "inlets": [
+      {"type": "message", "description": "Message to forward"},
+      {"type": "symbol", "description": "Destination receive name"}
+    ],
+    "outlets": [],
+    "related": ["send", "receive"],
+    "tags": ["forward", "send", "dynamic", "messaging"],
+    "tags_ja": ["転送", "送信", "動的", "メッセージング"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "gate": {
+    "domain": "max",
+    "category": "logic",
+    "description": "Route messages through selectable outlets (like a switch)",
+    "description_ja": "選択可能なアウトレットにメッセージをルーティング（スイッチのように）",
+    "inlets": [
+      {"type": "int", "description": "Select outlet (0=closed, 1-N=outlet number)"},
+      {"type": "message", "description": "Message to route"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Output 1 (expandable)"}
+    ],
+    "related": ["switch", "select", "route", "if"],
+    "tags": ["gate", "switch", "route", "control flow"],
+    "tags_ja": ["ゲート", "スイッチ", "ルーティング", "制御フロー"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "switch": {
+    "domain": "max",
+    "category": "logic",
+    "description": "Select one of several inputs to pass through (opposite of gate)",
+    "description_ja": "複数の入力から一つを選択して通過させる（gateの逆）",
+    "inlets": [
+      {"type": "int", "description": "Select input (0=closed, 1-N=inlet number)"},
+      {"type": "message", "description": "Input 1 (expandable)"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Selected input passed through"}
+    ],
+    "related": ["gate", "select", "route"],
+    "tags": ["switch", "select", "input", "control flow"],
+    "tags_ja": ["スイッチ", "選択", "入力", "制御フロー"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "select": {
+    "domain": "max",
+    "category": "logic",
+    "description": "Output bang from matching outlet when input matches specified values",
+    "description_ja": "入力が指定値と一致した時、対応するアウトレットからbangを出力",
+    "inlets": [
+      {"type": "int/symbol", "description": "Value to test"}
+    ],
+    "outlets": [
+      {"type": "bang", "description": "Bang if matched (one per argument)"},
+      {"type": "message", "description": "Non-matching values"}
+    ],
+    "related": ["route", "gate", "if", "match"],
+    "tags": ["select", "match", "compare", "conditional"],
+    "tags_ja": ["選択", "一致", "比較", "条件"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "route": {
+    "domain": "max",
+    "category": "logic",
+    "description": "Route messages based on their first element (selector)",
+    "description_ja": "最初の要素（セレクター）に基づいてメッセージをルーティング",
+    "inlets": [
+      {"type": "message", "description": "Message to route"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Matched output (one per argument)"},
+      {"type": "message", "description": "Unmatched messages"}
+    ],
+    "related": ["select", "gate", "routepass"],
+    "tags": ["route", "selector", "parse", "dispatch"],
+    "tags_ja": ["ルーティング", "セレクター", "解析", "振り分け"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "if": {
+    "domain": "max",
+    "category": "logic",
+    "description": "Conditional statement with C-like expression syntax",
+    "description_ja": "C言語風の式構文による条件分岐",
+    "inlets": [
+      {"type": "int/float", "description": "Left operand ($i1 or $f1)"},
+      {"type": "int/float", "description": "Right operand ($i2 or $f2)"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Then output"},
+      {"type": "message", "description": "Else output"}
+    ],
+    "related": ["select", "gate", "expr", "split"],
+    "tags": ["conditional", "if", "logic", "comparison"],
+    "tags_ja": ["条件分岐", "ロジック", "比較"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "split": {
+    "domain": "max",
+    "category": "logic",
+    "description": "Split numbers into two ranges based on low and high bounds",
+    "description_ja": "上限と下限に基づいて数値を2つの範囲に分割",
+    "inlets": [
+      {"type": "int/float", "description": "Value to test"}
+    ],
+    "outlets": [
+      {"type": "int/float", "description": "In-range values"},
+      {"type": "int/float", "description": "Out-of-range values"}
+    ],
+    "related": ["if", "select", "clip"],
+    "tags": ["split", "range", "filter", "conditional"],
+    "tags_ja": ["分割", "範囲", "フィルター", "条件"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "metro": {
+    "domain": "max",
+    "category": "timing",
+    "description": "Metronome - output bangs at regular intervals",
+    "description_ja": "メトロノーム - 一定間隔でbangを出力",
+    "inlets": [
+      {"type": "int/bang", "description": "Start (bang/non-zero) or stop (0)"},
+      {"type": "int/float", "description": "Interval in ms"}
+    ],
+    "outlets": [
+      {"type": "bang", "description": "Timed bang output"}
+    ],
+    "related": ["delay", "timer", "pipe", "transport"],
+    "tags": ["metro", "timing", "clock", "regular", "interval"],
+    "tags_ja": ["メトロノーム", "タイミング", "クロック", "定期", "間隔"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "delay": {
+    "domain": "max",
+    "category": "timing",
+    "description": "Delay a bang by a specified time in milliseconds",
+    "description_ja": "指定ミリ秒だけbangを遅延",
+    "inlets": [
+      {"type": "bang", "description": "Trigger delayed bang"},
+      {"type": "int", "description": "Delay time in ms"}
+    ],
+    "outlets": [
+      {"type": "bang", "description": "Delayed bang output"}
+    ],
+    "related": ["metro", "pipe", "timer"],
+    "tags": ["delay", "timing", "wait"],
+    "tags_ja": ["遅延", "タイミング", "待機"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "pipe": {
+    "domain": "max",
+    "category": "timing",
+    "description": "Delay any message (not just bangs) by a specified time",
+    "description_ja": "任意のメッセージ（bangだけでなく）を指定時間だけ遅延",
+    "inlets": [
+      {"type": "message", "description": "Message to delay"},
+      {"type": "int", "description": "Delay time in ms"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Delayed message output"}
+    ],
+    "related": ["delay", "metro", "timer"],
+    "tags": ["delay", "pipe", "message delay", "timing"],
+    "tags_ja": ["遅延", "パイプ", "メッセージ遅延", "タイミング"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "timer": {
+    "domain": "max",
+    "category": "timing",
+    "description": "Measure elapsed time between two bangs",
+    "description_ja": "2つのbang間の経過時間を計測",
+    "inlets": [
+      {"type": "bang", "description": "Start timer"},
+      {"type": "bang", "description": "Stop timer and output elapsed time"}
+    ],
+    "outlets": [
+      {"type": "float", "description": "Elapsed time in ms"}
+    ],
+    "related": ["metro", "delay", "clocker"],
+    "tags": ["timer", "elapsed", "measure", "timing"],
+    "tags_ja": ["タイマー", "経過時間", "計測", "タイミング"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "transport": {
+    "domain": "max",
+    "category": "timing",
+    "description": "Global transport control for tempo-synced timing",
+    "description_ja": "テンポ同期タイミング用のグローバルトランスポートコントロール",
+    "inlets": [
+      {"type": "message", "description": "Transport control messages (start, stop, tempo)"}
+    ],
+    "outlets": [
+      {"type": "int", "description": "Transport state (1/0)"}
+    ],
+    "related": ["metro", "timepoint", "when"],
+    "tags": ["transport", "tempo", "BPM", "sync", "timing"],
+    "tags_ja": ["トランスポート", "テンポ", "BPM", "同期", "タイミング"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "line": {
+    "domain": "max",
+    "category": "timing",
+    "description": "Generate linear ramps between values over time (control rate)",
+    "description_ja": "時間経過で値間の線形ランプを生成（コントロールレート）",
+    "inlets": [
+      {"type": "list", "description": "Target value, ramp time in ms"}
+    ],
+    "outlets": [
+      {"type": "float", "description": "Current ramp value"}
+    ],
+    "related": ["line~", "function", "curve~"],
+    "tags": ["ramp", "interpolation", "animation", "timing"],
+    "tags_ja": ["ランプ", "補間", "アニメーション", "タイミング"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "pack": {
+    "domain": "max",
+    "category": "data",
+    "description": "Combine multiple values into a single list message",
+    "description_ja": "複数の値を一つのリストメッセージに結合",
+    "inlets": [
+      {"type": "int/float/symbol", "description": "First element (triggers output)"},
+      {"type": "int/float/symbol", "description": "Second element (expandable)"}
+    ],
+    "outlets": [
+      {"type": "list", "description": "Combined list output"}
+    ],
+    "related": ["unpack", "pak", "zl"],
+    "tags": ["list", "pack", "combine", "data"],
+    "tags_ja": ["リスト", "パック", "結合", "データ"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "unpack": {
+    "domain": "max",
+    "category": "data",
+    "description": "Split a list into individual values on separate outlets",
+    "description_ja": "リストを個別の値に分割して別々のアウトレットに出力",
+    "inlets": [
+      {"type": "list", "description": "List to unpack"}
+    ],
+    "outlets": [
+      {"type": "int/float/symbol", "description": "Individual elements (one per outlet)"}
+    ],
+    "related": ["pack", "zl", "iter"],
+    "tags": ["list", "unpack", "split", "data"],
+    "tags_ja": ["リスト", "アンパック", "分割", "データ"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "zl": {
+    "domain": "max",
+    "category": "data",
+    "description": "Versatile list processing with many modes (group, slice, sort, rev, etc.)",
+    "description_ja": "多数のモード（group, slice, sort, rev等）を持つ多機能リスト処理",
+    "inlets": [
+      {"type": "list/message", "description": "List input"},
+      {"type": "list/message", "description": "Second list (for some modes)"}
+    ],
+    "outlets": [
+      {"type": "list", "description": "Processed list output"},
+      {"type": "message", "description": "Additional output (mode-dependent)"}
+    ],
+    "related": ["pack", "unpack", "iter", "buddy"],
+    "tags": ["list", "processing", "sort", "slice", "group", "data"],
+    "tags_ja": ["リスト", "処理", "ソート", "スライス", "グループ", "データ"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "coll": {
+    "domain": "max",
+    "category": "data",
+    "description": "Store and retrieve indexed collections of data",
+    "description_ja": "インデックス付きデータコレクションの保存と取得",
+    "inlets": [
+      {"type": "message", "description": "Index, data, and management messages"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Retrieved data"},
+      {"type": "message", "description": "Index/address output"},
+      {"type": "bang", "description": "End of dump"}
+    ],
+    "related": ["dict", "table", "preset"],
+    "tags": ["collection", "storage", "database", "index", "data"],
+    "tags_ja": ["コレクション", "保存", "データベース", "インデックス", "データ"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "dict": {
+    "domain": "max",
+    "category": "data",
+    "description": "Store and manipulate data in JSON-like key-value dictionaries",
+    "description_ja": "JSONライクなキーバリュー辞書でデータを保存・操作",
+    "inlets": [
+      {"type": "message", "description": "Dictionary operation messages"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Dictionary reference or retrieved data"},
+      {"type": "message", "description": "Query output"}
+    ],
+    "related": ["coll", "dict.view", "dict.route"],
+    "tags": ["dictionary", "JSON", "key-value", "storage", "data"],
+    "tags_ja": ["辞書", "JSON", "キーバリュー", "保存", "データ"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "table": {
+    "domain": "max",
+    "category": "data",
+    "description": "Store and display an array of integer values with graphical editor",
+    "description_ja": "グラフィカルエディター付きの整数値配列の保存と表示",
+    "inlets": [
+      {"type": "int", "description": "Index to retrieve or store"},
+      {"type": "int", "description": "Value to store at index"}
+    ],
+    "outlets": [
+      {"type": "int", "description": "Retrieved value"}
+    ],
+    "related": ["coll", "buffer~", "multislider"],
+    "tags": ["table", "array", "lookup", "storage", "data"],
+    "tags_ja": ["テーブル", "配列", "ルックアップ", "保存", "データ"],
+    "rnbo_compatible": false,
+    "size": {"width": 200, "height": 100}
+  },
+  "loadbang": {
+    "domain": "max",
+    "category": "control",
+    "description": "Send a bang when the patcher finishes loading",
+    "description_ja": "パッチャーの読み込み完了時にbangを送信",
+    "inlets": [],
+    "outlets": [
+      {"type": "bang", "description": "Bang on load"}
+    ],
+    "related": ["closebang", "trigger", "deferlow"],
+    "tags": ["init", "startup", "load", "bang"],
+    "tags_ja": ["初期化", "スタートアップ", "ロード", "バン"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "closebang": {
+    "domain": "max",
+    "category": "control",
+    "description": "Send a bang when the patcher is about to close",
+    "description_ja": "パッチャーが閉じようとする時にbangを送信",
+    "inlets": [],
+    "outlets": [
+      {"type": "bang", "description": "Bang on close"}
+    ],
+    "related": ["loadbang", "freebang"],
+    "tags": ["close", "shutdown", "cleanup", "bang"],
+    "tags_ja": ["閉じる", "シャットダウン", "クリーンアップ", "バン"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "trigger": {
+    "domain": "max",
+    "category": "control",
+    "description": "Output multiple values in right-to-left order from a single input",
+    "description_ja": "一つの入力から右から左の順に複数の値を出力",
+    "inlets": [
+      {"type": "message", "description": "Any input message"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Converted outputs (b=bang, i=int, f=float, l=list, s=symbol)"}
+    ],
+    "related": ["loadbang", "button", "bang"],
+    "tags": ["trigger", "order", "convert", "sequence", "control flow"],
+    "tags_ja": ["トリガー", "順序", "変換", "シーケンス", "制御フロー"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "bang": {
+    "domain": "max",
+    "category": "control",
+    "description": "Output a bang message (equivalent to the button object)",
+    "description_ja": "bangメッセージを出力（buttonオブジェクトと同等）",
+    "inlets": [
+      {"type": "bang", "description": "Trigger bang"}
+    ],
+    "outlets": [
+      {"type": "bang", "description": "Bang output"}
+    ],
+    "related": ["button", "trigger", "loadbang"],
+    "tags": ["bang", "trigger", "control"],
+    "tags_ja": ["バン", "トリガー", "制御"],
+    "rnbo_compatible": true,
+    "size": {"width": 24, "height": 24}
+  },
+  "p": {
+    "domain": "max",
+    "category": "subpatch",
+    "description": "Create a subpatcher (shorthand for patcher)",
+    "description_ja": "サブパッチャーを作成（patcherの省略形）",
+    "inlets": [
+      {"type": "message", "description": "Inputs defined by inlet objects inside"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Outputs defined by outlet objects inside"}
+    ],
+    "related": ["patcher", "bpatcher", "poly~"],
+    "tags": ["subpatch", "encapsulate", "organize", "abstraction"],
+    "tags_ja": ["サブパッチ", "カプセル化", "整理", "アブストラクション"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "patcher": {
+    "domain": "max",
+    "category": "subpatch",
+    "description": "Create a subpatcher window",
+    "description_ja": "サブパッチャーウィンドウを作成",
+    "inlets": [
+      {"type": "message", "description": "Inputs defined by inlet objects inside"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Outputs defined by outlet objects inside"}
+    ],
+    "related": ["p", "bpatcher", "poly~"],
+    "tags": ["subpatch", "patcher", "encapsulate"],
+    "tags_ja": ["サブパッチ", "パッチャー", "カプセル化"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "bpatcher": {
+    "domain": "max",
+    "category": "subpatch",
+    "description": "Embed a patcher inside the parent with a visible UI window",
+    "description_ja": "表示可能なUIウィンドウでパッチャーを親に埋め込む",
+    "inlets": [
+      {"type": "message", "description": "Inputs defined by inlet objects inside"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Outputs defined by outlet objects inside"}
+    ],
+    "related": ["p", "patcher", "poly~"],
+    "tags": ["subpatch", "embed", "UI", "visible"],
+    "tags_ja": ["サブパッチ", "埋め込み", "UI", "可視"],
+    "rnbo_compatible": false,
+    "size": {"width": 200, "height": 150}
+  },
+  "notein": {
+    "domain": "max",
+    "category": "midi",
+    "description": "Receive MIDI note messages (pitch, velocity, channel)",
+    "description_ja": "MIDIノートメッセージを受信（ピッチ、ベロシティ、チャンネル）",
+    "inlets": [
+      {"type": "int", "description": "MIDI port selection"}
+    ],
+    "outlets": [
+      {"type": "int", "description": "Pitch (0-127)"},
+      {"type": "int", "description": "Velocity (0-127)"},
+      {"type": "int", "description": "Channel (1-16)"}
+    ],
+    "related": ["noteout", "ctlin", "midiin", "kslider"],
+    "tags": ["MIDI", "note", "input", "keyboard"],
+    "tags_ja": ["MIDI", "ノート", "入力", "キーボード"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "noteout": {
+    "domain": "max",
+    "category": "midi",
+    "description": "Send MIDI note messages",
+    "description_ja": "MIDIノートメッセージを送信",
+    "inlets": [
+      {"type": "int", "description": "Pitch (0-127)"},
+      {"type": "int", "description": "Velocity (0-127)"},
+      {"type": "int", "description": "Channel (1-16)"}
+    ],
+    "outlets": [],
+    "related": ["notein", "ctlout", "midiout"],
+    "tags": ["MIDI", "note", "output"],
+    "tags_ja": ["MIDI", "ノート", "出力"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "ctlin": {
+    "domain": "max",
+    "category": "midi",
+    "description": "Receive MIDI continuous controller messages",
+    "description_ja": "MIDI CCメッセージを受信",
+    "inlets": [
+      {"type": "int", "description": "MIDI port selection"}
+    ],
+    "outlets": [
+      {"type": "int", "description": "Controller value (0-127)"},
+      {"type": "int", "description": "Controller number"},
+      {"type": "int", "description": "Channel (1-16)"}
+    ],
+    "related": ["ctlout", "notein", "midiin"],
+    "tags": ["MIDI", "CC", "controller", "input"],
+    "tags_ja": ["MIDI", "CC", "コントローラー", "入力"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "ctlout": {
+    "domain": "max",
+    "category": "midi",
+    "description": "Send MIDI continuous controller messages",
+    "description_ja": "MIDI CCメッセージを送信",
+    "inlets": [
+      {"type": "int", "description": "Controller value (0-127)"},
+      {"type": "int", "description": "Controller number"},
+      {"type": "int", "description": "Channel (1-16)"}
+    ],
+    "outlets": [],
+    "related": ["ctlin", "noteout", "midiout"],
+    "tags": ["MIDI", "CC", "controller", "output"],
+    "tags_ja": ["MIDI", "CC", "コントローラー", "出力"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "midiin": {
+    "domain": "max",
+    "category": "midi",
+    "description": "Receive raw MIDI bytes from MIDI input",
+    "description_ja": "MIDI入力から生のMIDIバイトを受信",
+    "inlets": [
+      {"type": "int", "description": "MIDI port selection"}
+    ],
+    "outlets": [
+      {"type": "int", "description": "Raw MIDI byte"},
+      {"type": "int", "description": "MIDI port number"}
+    ],
+    "related": ["midiout", "notein", "ctlin", "midiparse"],
+    "tags": ["MIDI", "raw", "byte", "input"],
+    "tags_ja": ["MIDI", "生データ", "バイト", "入力"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "midiout": {
+    "domain": "max",
+    "category": "midi",
+    "description": "Send raw MIDI bytes to MIDI output",
+    "description_ja": "MIDI出力に生のMIDIバイトを送信",
+    "inlets": [
+      {"type": "int", "description": "Raw MIDI byte to send"},
+      {"type": "int", "description": "MIDI port selection"}
+    ],
+    "outlets": [],
+    "related": ["midiin", "noteout", "ctlout", "midiformat"],
+    "tags": ["MIDI", "raw", "byte", "output"],
+    "tags_ja": ["MIDI", "生データ", "バイト", "出力"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "mtof": {
+    "domain": "max",
+    "category": "midi",
+    "description": "Convert MIDI note number to frequency in Hz",
+    "description_ja": "MIDIノート番号を周波数（Hz）に変換",
+    "inlets": [
+      {"type": "int/float", "description": "MIDI note number (0-127)"}
+    ],
+    "outlets": [
+      {"type": "float", "description": "Frequency in Hz"}
+    ],
+    "related": ["ftom", "notein", "kslider"],
+    "tags": ["MIDI", "frequency", "conversion", "pitch"],
+    "tags_ja": ["MIDI", "周波数", "変換", "ピッチ"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "ftom": {
+    "domain": "max",
+    "category": "midi",
+    "description": "Convert frequency in Hz to MIDI note number",
+    "description_ja": "周波数（Hz）をMIDIノート番号に変換",
+    "inlets": [
+      {"type": "float", "description": "Frequency in Hz"}
+    ],
+    "outlets": [
+      {"type": "float", "description": "MIDI note number"}
+    ],
+    "related": ["mtof", "notein"],
+    "tags": ["MIDI", "frequency", "conversion", "pitch"],
+    "tags_ja": ["MIDI", "周波数", "変換", "ピッチ"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "makenote": {
+    "domain": "max",
+    "category": "midi",
+    "description": "Generate paired note-on and note-off messages with duration",
+    "description_ja": "持続時間付きのノートオン・ノートオフペアメッセージを生成",
+    "inlets": [
+      {"type": "int", "description": "Pitch (0-127)"},
+      {"type": "int", "description": "Velocity (0-127)"},
+      {"type": "int", "description": "Duration in ms"}
+    ],
+    "outlets": [
+      {"type": "int", "description": "Pitch"},
+      {"type": "int", "description": "Velocity (0 for note-off)"}
+    ],
+    "related": ["notein", "noteout", "borax"],
+    "tags": ["MIDI", "note", "duration", "note-off"],
+    "tags_ja": ["MIDI", "ノート", "持続時間", "ノートオフ"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "kslider": {
+    "domain": "max",
+    "category": "midi",
+    "description": "On-screen piano keyboard for MIDI note input and display",
+    "description_ja": "MIDIノート入力と表示用のオンスクリーンピアノキーボード",
+    "inlets": [
+      {"type": "int", "description": "MIDI note number"},
+      {"type": "int", "description": "Velocity"}
+    ],
+    "outlets": [
+      {"type": "int", "description": "MIDI note number"},
+      {"type": "int", "description": "Velocity"}
+    ],
+    "related": ["notein", "noteout", "mtof"],
+    "tags": ["keyboard", "piano", "MIDI", "UI", "note"],
+    "tags_ja": ["キーボード", "ピアノ", "MIDI", "ノート"],
+    "rnbo_compatible": false,
+    "size": {"width": 300, "height": 60}
+  },
+  "expr": {
+    "domain": "max",
+    "category": "math",
+    "description": "Evaluate mathematical expressions with C-like syntax",
+    "description_ja": "C言語風構文で数式を評価",
+    "inlets": [
+      {"type": "int/float", "description": "Variable $i1/$f1 (expandable)"}
+    ],
+    "outlets": [
+      {"type": "int/float", "description": "Result"}
+    ],
+    "related": ["if", "vexpr", "+", "*", "scale"],
+    "tags": ["math", "expression", "formula", "calculation"],
+    "tags_ja": ["数学", "式", "計算"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "scale": {
+    "domain": "max",
+    "category": "math",
+    "description": "Map a value from one range to another (control rate)",
+    "description_ja": "値を一つの範囲から別の範囲にマッピング（コントロールレート）",
+    "inlets": [
+      {"type": "int/float", "description": "Input value"},
+      {"type": "float", "description": "Input low"},
+      {"type": "float", "description": "Input high"},
+      {"type": "float", "description": "Output low"},
+      {"type": "float", "description": "Output high"}
+    ],
+    "outlets": [
+      {"type": "float", "description": "Scaled value"}
+    ],
+    "related": ["scale~", "expr", "clip"],
+    "tags": ["scale", "map", "range", "math"],
+    "tags_ja": ["スケール", "マッピング", "範囲", "数学"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "random": {
+    "domain": "max",
+    "category": "math",
+    "description": "Generate random integer values within a range",
+    "description_ja": "指定範囲内のランダムな整数値を生成",
+    "inlets": [
+      {"type": "bang", "description": "Generate random number"},
+      {"type": "int", "description": "Set range (0 to N-1)"}
+    ],
+    "outlets": [
+      {"type": "int", "description": "Random integer"}
+    ],
+    "related": ["drunk", "urn", "noise~"],
+    "tags": ["random", "chance", "stochastic", "math"],
+    "tags_ja": ["ランダム", "偶然", "確率", "数学"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "counter": {
+    "domain": "max",
+    "category": "math",
+    "description": "Count bangs with configurable direction, range, and carry",
+    "description_ja": "方向、範囲、キャリー設定可能なbangカウンター",
+    "inlets": [
+      {"type": "bang", "description": "Increment/decrement count"},
+      {"type": "int", "description": "Direction (0=up, 1=down, 2=updown)"},
+      {"type": "int", "description": "Set minimum"},
+      {"type": "int", "description": "Set maximum"}
+    ],
+    "outlets": [
+      {"type": "int", "description": "Count value"},
+      {"type": "bang", "description": "Carry (overflow/underflow)"},
+      {"type": "int", "description": "Count delta (+1 or -1)"}
+    ],
+    "related": ["metro", "accum", "drunk"],
+    "tags": ["count", "counter", "increment", "math"],
+    "tags_ja": ["カウント", "カウンター", "インクリメント", "数学"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "multislider": {
+    "domain": "max",
+    "category": "ui",
+    "description": "Array of sliders for displaying and editing multiple values",
+    "description_ja": "複数の値を表示・編集するスライダーの配列",
+    "inlets": [
+      {"type": "list", "description": "Set slider values"}
+    ],
+    "outlets": [
+      {"type": "list", "description": "Current slider values"}
+    ],
+    "related": ["slider", "table", "function"],
+    "tags": ["multislider", "array", "display", "UI", "visualization"],
+    "tags_ja": ["マルチスライダー", "配列", "表示", "可視化"],
+    "rnbo_compatible": false,
+    "size": {"width": 200, "height": 100}
+  },
+  "spectroscope~": {
+    "domain": "msp",
+    "category": "analysis",
+    "description": "Real-time spectral display of audio signal",
+    "description_ja": "オーディオ信号のリアルタイムスペクトル表示",
+    "inlets": [
+      {"type": "signal", "description": "Signal to analyze"}
+    ],
+    "outlets": [],
+    "related": ["fft~", "meter~", "scope~"],
+    "tags": ["spectrum", "FFT", "display", "analysis", "UI"],
+    "tags_ja": ["スペクトル", "FFT", "表示", "解析"],
+    "rnbo_compatible": false,
+    "size": {"width": 200, "height": 100}
+  },
+  "scope~": {
+    "domain": "msp",
+    "category": "analysis",
+    "description": "Oscilloscope-style waveform display of audio signal",
+    "description_ja": "オシロスコープ風のオーディオ信号波形表示",
+    "inlets": [
+      {"type": "signal", "description": "Signal to display"}
+    ],
+    "outlets": [],
+    "related": ["spectroscope~", "meter~", "number~"],
+    "tags": ["oscilloscope", "waveform", "display", "analysis", "UI"],
+    "tags_ja": ["オシロスコープ", "波形", "表示", "解析"],
+    "rnbo_compatible": false,
+    "size": {"width": 200, "height": 100}
+  },
+  "rnbo~": {
+    "domain": "rnbo",
+    "category": "rnbo",
+    "description": "Host a RNBO patcher for export to C++, web, or hardware targets",
+    "description_ja": "C++、Web、ハードウェアターゲットへのエクスポート用RNBOパッチャーをホスト",
+    "inlets": [
+      {"type": "signal/message", "description": "Audio and parameter inputs (configurable)"}
+    ],
+    "outlets": [
+      {"type": "signal/message", "description": "Audio and data outputs (configurable)"}
+    ],
+    "related": ["poly~", "gen~"],
+    "tags": ["RNBO", "export", "codegen", "C++", "web", "hardware"],
+    "tags_ja": ["RNBO", "エクスポート", "コード生成", "C++", "Web", "ハードウェア"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "gen~": {
+    "domain": "msp",
+    "category": "codegen",
+    "description": "Sample-level audio processing with compiled GenExpr code",
+    "description_ja": "コンパイル済みGenExprコードによるサンプルレベルのオーディオ処理",
+    "inlets": [
+      {"type": "signal", "description": "Signal inputs (configurable)"}
+    ],
+    "outlets": [
+      {"type": "signal", "description": "Signal outputs (configurable)"}
+    ],
+    "related": ["rnbo~", "codebox~", "expr~"],
+    "tags": ["gen", "codegen", "sample-rate", "DSP", "performance"],
+    "tags_ja": ["gen", "コード生成", "サンプルレート", "DSP", "パフォーマンス"],
+    "rnbo_compatible": true,
+    "size": {"width": 80, "height": 22}
+  },
+  "jit.matrix": {
+    "domain": "jitter",
+    "category": "processing",
+    "description": "Create and store a Jitter matrix with specified dimensions and type",
+    "description_ja": "指定された次元と型でJitterマトリックスを作成・保存",
+    "inlets": [
+      {"type": "jit_matrix/message", "description": "Matrix data or messages"}
+    ],
+    "outlets": [
+      {"type": "jit_matrix", "description": "Matrix output"}
+    ],
+    "related": ["jit.op", "jit.unpack", "jit.pack"],
+    "tags": ["matrix", "data", "storage", "image"],
+    "tags_ja": ["マトリックス", "データ", "保存", "画像"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "jit.gl.pix": {
+    "domain": "jitter",
+    "category": "gl",
+    "description": "GPU-based pixel processing with Gen expressions",
+    "description_ja": "Gen式によるGPUベースのピクセル処理",
+    "inlets": [
+      {"type": "texture/message", "description": "Texture input or messages"}
+    ],
+    "outlets": [
+      {"type": "texture", "description": "Processed texture output"}
+    ],
+    "related": ["jit.gl.render", "jit.gl.shader", "gen"],
+    "tags": ["GPU", "shader", "pixel", "gen", "processing"],
+    "tags_ja": ["GPU", "シェーダー", "ピクセル", "処理"],
+    "rnbo_compatible": false,
+    "size": {"width": 100, "height": 22}
+  },
+  "jit.noise": {
+    "domain": "jitter",
+    "category": "processing",
+    "description": "Generate a matrix filled with random values",
+    "description_ja": "ランダム値で満たされたマトリックスを生成",
+    "inlets": [
+      {"type": "bang/message", "description": "Trigger generation or set attributes"}
+    ],
+    "outlets": [
+      {"type": "jit_matrix", "description": "Random matrix output"}
+    ],
+    "related": ["jit.matrix", "noise~", "jit.op"],
+    "tags": ["noise", "random", "matrix", "generation"],
+    "tags_ja": ["ノイズ", "ランダム", "マトリックス", "生成"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "preset": {
+    "domain": "max",
+    "category": "data",
+    "description": "Store and recall states of UI objects in the patcher",
+    "description_ja": "パッチャー内のUIオブジェクトの状態を保存・呼び出し",
+    "inlets": [
+      {"type": "int/message", "description": "Recall preset number or management messages"}
+    ],
+    "outlets": [
+      {"type": "int", "description": "Current preset number"}
+    ],
+    "related": ["pattr", "pattrstorage", "autopattr"],
+    "tags": ["preset", "save", "recall", "state", "UI"],
+    "tags_ja": ["プリセット", "保存", "呼び出し", "状態"],
+    "rnbo_compatible": false,
+    "size": {"width": 64, "height": 40}
+  },
+  "pattr": {
+    "domain": "max",
+    "category": "data",
+    "description": "Bind to and store the state of a named parameter",
+    "description_ja": "名前付きパラメーターの状態をバインドして保存",
+    "inlets": [
+      {"type": "message", "description": "Set value or bind messages"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Current parameter value"}
+    ],
+    "related": ["pattrstorage", "autopattr", "preset"],
+    "tags": ["parameter", "state", "storage", "binding"],
+    "tags_ja": ["パラメーター", "状態", "保存", "バインディング"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "pattrstorage": {
+    "domain": "max",
+    "category": "data",
+    "description": "Central storage and management for pattr-based presets with interpolation",
+    "description_ja": "補間機能付きpattr基盤のプリセット集中管理・保存",
+    "inlets": [
+      {"type": "message", "description": "Recall, store, interpolate, and management messages"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Preset data output"}
+    ],
+    "related": ["pattr", "autopattr", "preset"],
+    "tags": ["preset", "storage", "interpolation", "management"],
+    "tags_ja": ["プリセット", "保存", "補間", "管理"],
+    "rnbo_compatible": false,
+    "size": {"width": 100, "height": 22}
+  },
+  "js": {
+    "domain": "max",
+    "category": "scripting",
+    "description": "Execute JavaScript code within Max",
+    "description_ja": "Max内でJavaScriptコードを実行",
+    "inlets": [
+      {"type": "message", "description": "Messages to JavaScript functions"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Output from JavaScript (configurable)"}
+    ],
+    "related": ["v8", "node.script"],
+    "tags": ["JavaScript", "scripting", "code", "programming"],
+    "tags_ja": ["JavaScript", "スクリプト", "コード", "プログラミング"],
+    "rnbo_compatible": false,
+    "size": {"width": 80, "height": 22}
+  },
+  "node.script": {
+    "domain": "max",
+    "category": "scripting",
+    "description": "Run Node.js scripts within Max for server-side functionality",
+    "description_ja": "Max内でNode.jsスクリプトを実行してサーバーサイド機能を利用",
+    "inlets": [
+      {"type": "message", "description": "Messages to Node.js script"}
+    ],
+    "outlets": [
+      {"type": "message", "description": "Output from Node.js script"}
+    ],
+    "related": ["js", "v8"],
+    "tags": ["Node.js", "JavaScript", "server", "scripting", "npm"],
+    "tags_ja": ["Node.js", "JavaScript", "サーバー", "スクリプト"],
+    "rnbo_compatible": false,
+    "size": {"width": 100, "height": 22}
+  }
+}

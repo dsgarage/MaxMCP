@@ -1,0 +1,189 @@
+[
+  {
+    "id": "basic-synth",
+    "name": "基本シンセサイザー",
+    "name_en": "Basic Synthesizer",
+    "description": "オシレーターとエンベロープで音を出す基本構成",
+    "description_en": "Basic sound generation with oscillator and envelope",
+    "domain": "msp",
+    "tags": ["synth", "oscillator", "envelope", "synthesis", "シンセ", "音", "オシレーター", "beginner"],
+    "objects": ["cycle~", "adsr~", "*~", "ezdac~", "notein", "mtof"],
+    "skill": "/max-synth"
+  },
+  {
+    "id": "subtractive-synth",
+    "name": "減算シンセサイザー",
+    "name_en": "Subtractive Synthesizer",
+    "description": "オシレーター → フィルター → アンプの古典的なサブトラクティブシンセ構成",
+    "description_en": "Classic oscillator → filter → amp subtractive synthesis chain",
+    "domain": "msp",
+    "tags": ["synth", "subtractive", "filter", "synthesis", "サブトラクティブ", "フィルター", "アナログ"],
+    "objects": ["saw~", "lores~", "adsr~", "*~", "ezdac~", "notein", "mtof", "line~"],
+    "skill": "/max-synth"
+  },
+  {
+    "id": "fm-synth",
+    "name": "FMシンセサイザー",
+    "name_en": "FM Synthesizer",
+    "description": "周波数変調（FM）による音合成。キャリアとモジュレーターの構成",
+    "description_en": "Frequency modulation synthesis with carrier and modulator oscillators",
+    "domain": "msp",
+    "tags": ["synth", "FM", "modulation", "synthesis", "FM合成", "変調", "周波数変調"],
+    "objects": ["cycle~", "*~", "+~", "adsr~", "ezdac~", "notein", "mtof", "number"],
+    "skill": "/max-synth"
+  },
+  {
+    "id": "sampler",
+    "name": "サンプラー",
+    "name_en": "Sampler / Sample Player",
+    "description": "オーディオファイルをバッファに読み込んで再生するサンプラー構成",
+    "description_en": "Load audio files into buffer and play back with loop and speed controls",
+    "domain": "msp",
+    "tags": ["sampler", "buffer", "playback", "loop", "sample", "サンプラー", "再生", "ループ"],
+    "objects": ["buffer~", "groove~", "waveform~", "play~", "ezdac~", "gain~", "flonum"],
+    "skill": "/max-sampler"
+  },
+  {
+    "id": "granular-playback",
+    "name": "グラニュラー再生",
+    "name_en": "Granular Playback",
+    "description": "バッファ内の音声を細かい粒（グレイン）に分割して再合成するグラニュラー技法",
+    "description_en": "Granular synthesis by splitting buffer audio into small grains and resynthesizing",
+    "domain": "msp",
+    "tags": ["granular", "grain", "texture", "buffer", "グラニュラー", "粒子", "テクスチャ"],
+    "objects": ["buffer~", "poly~", "groove~", "line~", "*~", "phasor~", "noise~", "random"],
+    "skill": "/max-granular"
+  },
+  {
+    "id": "delay-effect",
+    "name": "ディレイエフェクト",
+    "name_en": "Delay Effect",
+    "description": "tapin~/tapout~を使ったフィードバックディレイエフェクト",
+    "description_en": "Feedback delay effect using tapin~ and tapout~",
+    "domain": "msp",
+    "tags": ["delay", "echo", "effect", "feedback", "ディレイ", "エコー", "エフェクト"],
+    "objects": ["tapin~", "tapout~", "*~", "+~", "gain~", "ezdac~", "flonum"],
+    "skill": "/max-effect"
+  },
+  {
+    "id": "reverb-effect",
+    "name": "リバーブエフェクト",
+    "name_en": "Reverb Effect",
+    "description": "空間系エフェクトでリバーブ（残響）を付加する構成",
+    "description_en": "Spatial reverb effect for adding room ambience to audio signals",
+    "domain": "msp",
+    "tags": ["reverb", "space", "effect", "ambience", "リバーブ", "残響", "空間"],
+    "objects": ["reverb~", "tapin~", "tapout~", "*~", "+~", "gain~", "ezdac~"],
+    "skill": "/max-effect"
+  },
+  {
+    "id": "filter-chain",
+    "name": "フィルターチェーン",
+    "name_en": "Filter Chain",
+    "description": "EQやフィルターを直列接続して音色を加工するチェーン構成",
+    "description_en": "Series-connected filters and EQ for timbral shaping",
+    "domain": "msp",
+    "tags": ["filter", "EQ", "chain", "processing", "フィルター", "イコライザー", "音色"],
+    "objects": ["svf~", "biquad~", "lores~", "reson~", "onepole~", "gain~", "ezdac~", "flonum"],
+    "skill": "/max-effect"
+  },
+  {
+    "id": "midi-input",
+    "name": "MIDI入力処理",
+    "name_en": "MIDI Input Processing",
+    "description": "MIDIキーボードからの入力を受信して処理する基本構成",
+    "description_en": "Receive and process MIDI keyboard input for note and controller data",
+    "domain": "max",
+    "tags": ["MIDI", "input", "keyboard", "controller", "MIDI入力", "キーボード", "コントローラー"],
+    "objects": ["notein", "ctlin", "mtof", "makenote", "noteout", "kslider", "stripnote"],
+    "skill": "/max-midi"
+  },
+  {
+    "id": "midi-poly",
+    "name": "MIDIポリフォニック",
+    "name_en": "MIDI Polyphonic Synth",
+    "description": "poly~を使って複数ノートを同時に鳴らすポリフォニックシンセ構成",
+    "description_en": "Polyphonic synth using poly~ to handle multiple simultaneous notes",
+    "domain": "msp",
+    "tags": ["MIDI", "polyphony", "poly", "synth", "ポリフォニー", "複数ボイス", "シンセ"],
+    "objects": ["notein", "poly~", "thispoly~", "cycle~", "adsr~", "*~", "mtof", "ezdac~"],
+    "skill": "/max-synth"
+  },
+  {
+    "id": "camera-capture",
+    "name": "カメラキャプチャ",
+    "name_en": "Camera Capture",
+    "description": "ウェブカメラから映像をキャプチャして表示・処理する構成",
+    "description_en": "Capture video from webcam and display or process the frames",
+    "domain": "jitter",
+    "tags": ["camera", "capture", "video", "webcam", "カメラ", "キャプチャ", "ビデオ", "映像"],
+    "objects": ["jit.grab", "jit.pwindow", "jit.brcosa", "metro", "toggle"],
+    "skill": "/max-video"
+  },
+  {
+    "id": "video-playback",
+    "name": "ビデオ再生",
+    "name_en": "Video Playback",
+    "description": "動画ファイルを読み込んで再生・表示する構成",
+    "description_en": "Load and play back video files with transport controls",
+    "domain": "jitter",
+    "tags": ["video", "movie", "playback", "file", "ビデオ", "動画", "再生", "ファイル"],
+    "objects": ["jit.movie", "jit.pwindow", "jit.window", "metro", "toggle", "slider"],
+    "skill": "/max-video"
+  },
+  {
+    "id": "gl-3d-scene",
+    "name": "3Dシーン",
+    "name_en": "OpenGL 3D Scene",
+    "description": "OpenGLを使った3Dシーンの構築（形状、カメラ、ライティング）",
+    "description_en": "Build a 3D scene with OpenGL shapes, camera, and lighting",
+    "domain": "jitter",
+    "tags": ["3D", "OpenGL", "scene", "rendering", "3Dシーン", "レンダリング", "形状"],
+    "objects": ["jit.world", "jit.gl.gridshape", "jit.gl.camera", "jit.gl.render", "jit.gl.mesh", "jit.gl.texture"],
+    "skill": "/max-3d"
+  },
+  {
+    "id": "audio-reactive-visual",
+    "name": "音声リアクティブビジュアル",
+    "name_en": "Audio-Reactive Visual",
+    "description": "オーディオ信号の解析結果でビジュアルをリアルタイムに制御する構成",
+    "description_en": "Drive visuals in real-time from audio signal analysis (amplitude, spectrum)",
+    "domain": "msp",
+    "tags": ["audio-reactive", "visual", "analysis", "mapping", "オーディオリアクティブ", "ビジュアル", "解析", "VJ"],
+    "objects": ["peakamp~", "snapshot~", "fft~", "jit.gl.gridshape", "jit.world", "scale", "jit.gl.pix"],
+    "skill": "/max-audiovisual"
+  },
+  {
+    "id": "vst-host",
+    "name": "VSTプラグインホスト",
+    "name_en": "VST Plugin Host",
+    "description": "vst~を使って外部VST/AUプラグインをMaxパッチ内でホストする構成",
+    "description_en": "Host external VST/AU plugins within a Max patch using vst~",
+    "domain": "msp",
+    "tags": ["VST", "AU", "plugin", "host", "effect", "instrument", "プラグイン", "ホスト"],
+    "objects": ["vst~", "adc~", "dac~", "ezdac~", "gain~", "umenu"],
+    "skill": "/max-vst"
+  },
+  {
+    "id": "sequencer",
+    "name": "ステップシーケンサー",
+    "name_en": "Step Sequencer",
+    "description": "metroとcounterでステップを進めるシンプルなシーケンサー構成",
+    "description_en": "Simple step sequencer driven by metro and counter",
+    "domain": "max",
+    "tags": ["sequencer", "step", "pattern", "rhythm", "シーケンサー", "ステップ", "パターン", "リズム"],
+    "objects": ["metro", "counter", "coll", "makenote", "noteout", "multislider", "transport"],
+    "skill": "/max-sequencer"
+  },
+  {
+    "id": "data-sonification",
+    "name": "データソニフィケーション",
+    "name_en": "Data Sonification",
+    "description": "外部データ（センサー、API等）を音に変換するソニフィケーション構成",
+    "description_en": "Convert external data (sensors, API, etc.) to sound through mapping",
+    "domain": "max",
+    "tags": ["sonification", "data", "mapping", "sensor", "ソニフィケーション", "データ", "マッピング", "センサー"],
+    "objects": ["node.script", "dict", "scale", "cycle~", "line~", "*~", "ezdac~"],
+    "skill": "/max-data"
+  }
+]
